@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 })
 
-const DoctorModel = mongoose.model('doctor', { name: String, experience: String, gender: String, phone: String, password: String, speciality: String });
+const DoctorModel = mongoose.model('doctor', { name: String,email:String, password:String, experience: String, gender: String, phone: String, password: String, speciality: String });
 // getting all doctor list get request
 app.get('/doctor', cors(), async (req, res) => {
     const data = await DoctorModel.find()
@@ -40,9 +40,9 @@ app.get('/doctor', cors(), async (req, res) => {
 
 app.post('/doctor', cors(), async (req, res) => {
     console.log("request", req.body);
-    const { name, password, speciality, experience, gender, phone } = req.body;
+    const { name, password, email, speciality, experience, gender, phone } = req.body;
     const doctorObj = new DoctorModel({
-        name: name, password: password, speciality: speciality, experience: experience, gender: gender, phone: phone
+        name: name, password: password,email: email, speciality: speciality, experience: experience, gender: gender, phone: phone
     })
     const result = await doctorObj.save()
     // console.log(result)
@@ -52,7 +52,7 @@ app.post('/doctor', cors(), async (req, res) => {
 
 // for patient
 
-const PatientModel = mongoose.model('patient', { name: String, problem: String, experience: Number, gender: String, age: Number });
+const PatientModel = mongoose.model('patient', { name: String, email: String,password:String, problem: String, experience: Number, gender: String, age: Number });
 
 app.get('/patient', cors(), async (req, res) => {
     const data = await PatientModel.find()
@@ -62,9 +62,9 @@ app.get('/patient', cors(), async (req, res) => {
 
 app.post('/patient', cors(), async (req, res) => {
     console.log("request", req.body);
-    const { name, problem, experience, gender, age } = req.body;
+    const { name, problem, experience, gender, age, email, password } = req.body;
     const patientObj = new PatientModel({
-        name: name, problem: problem, experience: experience, gender: gender, age: age
+        name: name, problem: problem, experience: experience,password:password, gender: gender, age: age, email: email
     })
     const result = await patientObj.save()
     console.log(result)
@@ -97,8 +97,41 @@ app.post('/login', cors(), async (req, res) => {
     let msg = ""
     let data = {}
     const { usertype, email, password } = req.body
+    console.log(req.body)
     if (usertype === 'admin') {
         const response = await AdminModel.find({ email: email })
+        console.log(response)
+        if (response && response[0]) {
+            if (response[0].password === password) {
+                msg = "logged in successful"
+                data = response[0]
+            }
+            else {
+                msg = "password not matched"
+            }
+        }
+        else {
+            msg = "user email not found"
+        }
+    }
+    else if (usertype === 'patient') {
+        const response = await PatientModel.find({ email: email })
+        console.log(response)
+        if (response && response[0]) {
+            if (response[0].password === password) {
+                msg = "logged in successful"
+                data = response[0]
+            }
+            else {
+                msg = "password not matched"
+            }
+        }
+        else {
+            msg = "user email not found"
+        }
+    }
+    else if (usertype === 'doctor') {
+        const response = await DoctorModel.find({ email: email })
         console.log(response)
         if (response && response[0]) {
             if (response[0].password === password) {
