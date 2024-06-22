@@ -9,6 +9,8 @@ function PatientCreate(props) {
     const apiCall = async () => {
         const response = await axios.post("http://localhost:5000/patient", {
             name: name,
+            email: email,
+            password: password,
             problem: problem,
             experience: experience,
             gender: gender,
@@ -17,6 +19,8 @@ function PatientCreate(props) {
     }
     const navigate = useNavigate();
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [problem, setProblem] = useState("");
     const [experience, setExperience] = useState("");
     const [gender, setGender] = useState("");
@@ -24,6 +28,8 @@ function PatientCreate(props) {
     const createPatient = async () => {
         await apiCall();
         setName("")
+        setEmail("")
+        setPassword("")
         setProblem("")
         setExperience("")
         setGender("")
@@ -39,13 +45,32 @@ function PatientCreate(props) {
             <body className="container body">
                 <h3 style={{ textAlign: "center" }} >
                     <i className="bi bi-person"></i>  Patient Create</h3>
-                <form onSubmit={createPatient} className="form my-5">
                     <div className="row mx-2 p-1">
                         <div className="col-1">
                             <label for="name" className="col-form-label">Name: </label>
                         </div>
                         <div className="col-3">
                             <input type="text" value={name} className="form-control" placeholder="Enter your name" onChange={(event) => setName(event.target.value)} required />
+
+                        </div>
+                    </div>
+
+                    <div className="row mx-2 p-1">
+                        <div className="col-1">
+                            <label for="email" className="col-form-label">Email: </label>
+                        </div>
+                        <div className="col-3">
+                            <input type="email" value={email} className="form-control" placeholder="Enter your email" onChange={(event) => setEmail(event.target.value)}  />
+
+                        </div>
+                    </div>
+
+                    <div className="row mx-2 p-1">
+                        <div className="col-1">
+                            <label for="password" className="col-form-label">Password: </label>
+                        </div>
+                        <div className="col-3">
+                            <input type="password" value={password} className="form-control" placeholder="Enter your password" onChange={(event) => setPassword(event.target.value)} required />
 
                         </div>
                     </div>
@@ -98,8 +123,8 @@ function PatientCreate(props) {
                         </div>
                     </div>
                     <input type="reset" value="Reset" className='btn btn-outline-dark' id='button' />
-                    <button type="submit" className='btn btn-outline-dark' id='button' >Create Patient</button>
-                </form>
+                    <button onClick={createPatient} className='btn btn-outline-dark' id='button' >Create Patient</button>
+                
             </body>
         </>
     );

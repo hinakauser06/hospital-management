@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 })
 
-const DoctorModel = mongoose.model('doctor', { name: String, experience: String, gender: String, phone: String, password: String, speciality: String });
+const DoctorModel = mongoose.model('doctor', { name: String,email: String, experience: String, gender: String, phone: String, password: String, speciality: String });
 // getting all doctor list get request
 app.get('/doctor', cors(), async (req, res) => {
     const data = await DoctorModel.find()
@@ -40,9 +40,9 @@ app.get('/doctor', cors(), async (req, res) => {
 
 app.post('/doctor', cors(), async (req, res) => {
     console.log("request", req.body);
-    const { name, password, speciality, experience, gender, phone } = req.body;
+    const { name, email, password, speciality, experience, gender, phone } = req.body;
     const doctorObj = new DoctorModel({
-        name: name, password: password, speciality: speciality, experience: experience, gender: gender, phone: phone
+        name: name, email: email, password: password, speciality: speciality, experience: experience, gender: gender, phone: phone
     })
     const result = await doctorObj.save()
     // console.log(result)
@@ -52,7 +52,7 @@ app.post('/doctor', cors(), async (req, res) => {
 
 // for patient
 
-const PatientModel = mongoose.model('patient', { name: String, problem: String, experience: Number, gender: String, age: Number });
+const PatientModel = mongoose.model('patient', { name: String,email: String, password: String, problem: String, experience: Number, gender: String, age: Number });
 
 app.get('/patient', cors(), async (req, res) => {
     const data = await PatientModel.find()
@@ -62,9 +62,9 @@ app.get('/patient', cors(), async (req, res) => {
 
 app.post('/patient', cors(), async (req, res) => {
     console.log("request", req.body);
-    const { name, problem, experience, gender, age } = req.body;
+    const { name,email, password, problem, experience, gender, age } = req.body;
     const patientObj = new PatientModel({
-        name: name, problem: problem, experience: experience, gender: gender, age: age
+        name: name, email: email, password: password, problem: problem, experience: experience, gender: gender, age: age
     })
     const result = await patientObj.save()
     console.log(result)
