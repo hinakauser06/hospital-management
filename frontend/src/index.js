@@ -18,7 +18,10 @@ import AdminCreate from './pages/admin/Create';
 import AdminList from './pages/admin/List';
 // for bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 
@@ -26,7 +29,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Dashboard/>,
   },
   {
     path: "/doctor/list",
@@ -52,6 +55,10 @@ const router = createBrowserRouter([
     path: "/admin/create",
     element: <AdminCreate />,
   },
+  {
+    path: "/login",
+    element: <Login/>,
+  }
 
 ]);
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PatientCard from "../../Components/PatientCard";
+import Headerbar from "../../Components/Headerbar";
 
 function PatientList(props) {
     const navigate = useNavigate();
@@ -21,11 +22,14 @@ function PatientList(props) {
         return navigate("/patient/create");
     }
     return (
+        <>        <Headerbar/>
+
         <div className="App">
             <button onClick={redirect}>Add Patient</button>
             {patientResponse.map((item) => (<PatientCard patient={item} />
             ))}
         </div>
+        </>
     );
 }
 export default PatientList;

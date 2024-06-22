@@ -38,11 +38,11 @@ app.get('/doctor', cors(), async (req, res) => {
     res.json(data)
 })
 
-app.post('/doctor', cors(),async (req, res) => {
+app.post('/doctor', cors(), async (req, res) => {
     console.log("request", req.body);
-    const {name, password, speciality, experience, gender,phone} = req.body;
+    const { name, password, speciality, experience, gender, phone } = req.body;
     const doctorObj = new DoctorModel({
-        name:name, password:password, speciality:speciality, experience:experience, gender:gender, phone: phone 
+        name: name, password: password, speciality: speciality, experience: experience, gender: gender, phone: phone
     })
     const result = await doctorObj.save()
     // console.log(result)
@@ -62,9 +62,9 @@ app.get('/patient', cors(), async (req, res) => {
 
 app.post('/patient', cors(), async (req, res) => {
     console.log("request", req.body);
-    const{name, problem, experience, gender, age} = req.body;
+    const { name, problem, experience, gender, age } = req.body;
     const patientObj = new PatientModel({
-        name: name, problem:problem, experience:experience, gender:gender, age:age
+        name: name, problem: problem, experience: experience, gender: gender, age: age
     })
     const result = await patientObj.save()
     console.log(result)
@@ -72,7 +72,7 @@ app.post('/patient', cors(), async (req, res) => {
 })
 
 // for admin
-const AdminModel = mongoose.model('admin', { name: String, gender: String, dept: String, password: String, age: Number, experience: String });
+const AdminModel = mongoose.model('admin', { name: String, email: String, password: String, });
 
 app.get('/admin', cors(), async (req, res) => {
     const data = await AdminModel.find()
@@ -80,11 +80,11 @@ app.get('/admin', cors(), async (req, res) => {
     res.json(data)
 })
 
-app.post('/admin', cors(), async(req, res) => {
+app.post('/admin', cors(), async (req, res) => {
     console.log("request", req.body);
-    const{name, dept, experience, gender, age, password} = req.body;
+    const { name, email, password } = req.body;
     const adminObj = new AdminModel({
-        name: name, dept: dept, experience: experience, gender: gender, age: age, password: password
+        name: name, email: email, password: password
     })
     const result = await adminObj.save()
     console.log(result)
@@ -92,9 +92,48 @@ app.post('/admin', cors(), async(req, res) => {
 })
 
 
+app.post('/login', cors(), async (req, res) => {
+    // console.log("request", req.body);
+    let msg = ""
+    let data = {}
+    const { usertype, email, password } = req.body
+    if (usertype === 'admin') {
+        const response = await AdminModel.find({ email: email })
+        console.log(response)
+        if (response && response[0]) {
+            if (response[0].password === password) {
+                msg = "logged in successful"
+                data = response[0]
+            }
+            else {
+                msg = "password not matched"
+            }
+        }
+        else {
+            msg = "user email not found"
+        }
+    }
+
+
+    res.json({ message: msg, data: data })
+})
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// this should be always in last
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

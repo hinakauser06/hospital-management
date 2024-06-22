@@ -2,6 +2,8 @@ import React , { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminCard from "../../Components/AdminCard";
+import Headerbar from "../../Components/Headerbar";
+
 function AdminList(props) {
     const navigate = useNavigate();
     const [adminResponse, setadminResponse] = useState([]);
@@ -19,6 +21,7 @@ function AdminList(props) {
     }
     return (
         <>
+        <Headerbar/>
             <div className="App">
                 <button onClick={redirect}>Add Admin</button>
                 {adminResponse.map((admin) => (<AdminCard admin={admin} />

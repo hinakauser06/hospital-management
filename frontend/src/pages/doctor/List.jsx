@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Headerbar from '../../Components/Headerbar';
 
 import { useNavigate } from 'react-router-dom';
 // import AdminCard from './Components/AdminCard';
@@ -37,6 +38,8 @@ function DoctorList(props) {
     }
 
     return (
+        <>
+        <Headerbar/>
 
         <div className="App">
             <button onClick={redirect}>Add Doctor</button>
@@ -50,7 +53,7 @@ function DoctorList(props) {
 
             {console.log(patientResponse)} */}
         </div>
-
+</>
     );
 }
 export default DoctorList
