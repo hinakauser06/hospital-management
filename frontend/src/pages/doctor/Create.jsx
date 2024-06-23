@@ -6,6 +6,7 @@ function DoctorCreate(props) {
     const apiCall = async () => {
         const response = await axios.post("http://localhost:5000/doctor", {
             name: name,
+            email: email,
             password: password,
             speciality: speciality,
             experience: experience,
@@ -16,6 +17,7 @@ function DoctorCreate(props) {
     }
     const navigate = useNavigate();
     const [name, setName] = useState("");
+    const[email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [speciality, setSpeciality] = useState("");
     const [experience, setExperience] = useState("");
@@ -27,6 +29,7 @@ function DoctorCreate(props) {
 
         await apiCall();
         setName("")
+        setEmail("")
         setPassword("")
         setSpeciality("")
         setExperience("")
@@ -40,7 +43,6 @@ function DoctorCreate(props) {
             <body className='container body'>
                 <h2 style={{ textAlign: "center" }}>
                 <i className="fas fa-stethoscope"></i> Doctor Create</h2>
-                <form onSubmit={createDoctor} className='form my-5'>
 
                     <div class="row mx-2 p-1" >
                         <div className='col-1'>
@@ -48,6 +50,16 @@ function DoctorCreate(props) {
                         </div>
                         <div className='col-3'>
                             <input type="text" class="form-control" value={name} placeholder='Enter your name' onChange={(event) => setName(event.target.value)} required />
+
+                        </div>
+                    </div>
+
+                    <div class="row mx-2 p-1" >
+                        <div className='col-1'>
+                            <label for="email" class="col-form-label">Email: </label>
+                        </div>
+                        <div className='col-3'>
+                            <input type="email" class="form-control" value={email} placeholder='Enter your name' onChange={(event) => setEmail(event.target.value)}  />
 
                         </div>
                     </div>
@@ -104,7 +116,7 @@ function DoctorCreate(props) {
                         </div>
                     </div>
                     <input type="reset" value="Reset" className='btn btn-outline-dark' id='button' />
-                    <button type='submit' className='btn btn-outline-dark' id="button">Create Doctor</button>
+                    <button onClick={createDoctor} className='btn btn-outline-dark' id="button">Create Doctor</button>
                     <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -129,7 +141,7 @@ function DoctorCreate(props) {
 
 
 
-                </form >
+                
             </body >
 
 

@@ -10,8 +10,8 @@ function PatientCard(props) {
                         <p className="card-text">{props.patient.problem}</p>
                     </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">{props.patient.experience}</li>
-                        <li className="list-group-item">{props.patient.gender}</li>
+                        <li className="list-group-item">{props.patient.email}</li>
+                        <li className="list-group-item">{props.patient.password}</li>
                         <li className="list-group-item">{props.patient.age}</li>
                     </ul>
                     <div className="card-body">
