@@ -10,13 +10,10 @@ function DoctorCard(props) {
                     </div>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">{props.doctor.password}</li>
-                        <li className="list-group-item">{props.doctor.gender}</li>
-                        <li className="list-group-item">{props.doctor.age}</li>
+                        <li className="list-group-item">{props.doctor.dept}</li>
+                        <li className="list-group-item">{props.doctor.phone}</li>
                     </ul>
-                    <div className="card-body">
-                        <a href="#" className="card-link">{props.doctor.password}</a>
-                        {/* <a href="#" className="card-link">Another link</a> */}
-                    </div>
+                    
             </div>
         </>
     );
