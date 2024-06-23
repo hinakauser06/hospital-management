@@ -22,6 +22,9 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// for patientprofile
+
+import PatientProfile from './pages/profile/PatientProfile';
 
 
 
@@ -58,6 +61,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login/>,
+  },
+  {
+    path: "/profile/patient",
+    element: <PatientProfile/>,
   }
 
 ]);
