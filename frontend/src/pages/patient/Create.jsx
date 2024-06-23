@@ -11,18 +11,19 @@ function PatientCreate(props) {
             name: name,
             email: email,
             password: password,
-            problem: problem,
-            experience: experience,
+           address: address,
             gender: gender,
-            age: age
+            age: age,
+            phone: phone
         })
     }
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [problem, setProblem] = useState("");
-    const [experience, setExperience] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+   
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
     const createPatient = async () => {
@@ -30,8 +31,8 @@ function PatientCreate(props) {
         setName("")
         setEmail("")
         setPassword("")
-        setProblem("")
-        setExperience("")
+        setAddress("")
+     setPhone("")
         setGender("")
         setAge("")
         return navigate("/patient/list")
@@ -77,35 +78,27 @@ function PatientCreate(props) {
 
                     <div className="row mx-2 p-1">
                         <div className="col-1">
-                            <label for="problem" className="col-form-label">Problem: </label>
+                            <label for="address" className="col-form-label">Address: </label>
                         </div>
                         <div className="col-3">
-                            <input type="text" value={problem} className="form-control" placeholder="Enter you problem" onChange={(event) => setProblem(event.target.value)} />
+                            <input type="text" value={address} className="form-control" placeholder="Enter you address" onChange={(event) => setAddress(event.target.value)} />
 
                         </div>
                     </div>
 
-                    <div className="row mx-2 p-1">
-                        <div className="col-1">
-                            <label for="experience" className="col-form-label">Experience: </label>
-                        </div>
-                        <div className="col-3">
-                            <input type="text" value={experience} className="form-control" placeholder="Enter your experience" onChange={(event) => setExperience(event.target.value)} />
-
-                        </div>
-                    </div>
+                   
 
                     <div className='row mx-2 p-1 '>
                         <label className="form-label col-1">Gender</label>
                         <div className="form-check col-1 ms-2">
-                            <input className="form-check-input" type="radio" name="gender" id="male" value={gender} onChange={(event) => setGender(event.target.value)}  />
+                            <input className="form-check-input" type="radio" name="gender" id="male" checked={gender==="male"} onChange={(event) => setGender(event.target.id)}  />
                             <label className="form-check-label" htmlFor="male">
                                 Male
                             </label>
                         </div>
 
                         <div className="form-check col-1">
-                            <input className="form-check-input" type="radio" name="gender" id="female" value={gender} onChange={(event) => setGender(event.target.value)}  />
+                            <input className="form-check-input" type="radio" name="gender" id="female" checked={gender==="female"} onChange={(event) => setGender(event.target.id)}  />
                             <label className="form-check-label" htmlFor="female">
                                 Female
                             </label>
@@ -113,6 +106,15 @@ function PatientCreate(props) {
                     </div>
 
 
+
+                    <div className="row mx-2 p-1">
+                        <div className="col-1">
+                            <label for="phone" className="col-form-label">Phone: </label>
+                        </div>
+                        <div className="col-3">
+                            <input type="number" value={phone} className="form-control" placeholder="your phone" onChange={(event) => setPhone(event.target.value)} />
+                        </div>
+                    </div>
 
                     <div className="row mx-2 p-1">
                         <div className="col-1">
