@@ -1,12 +1,14 @@
 import { useSearchParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Headerbar from "../Components/Headerbar"
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
     const [currentState, setCurrentState] = useState("doctor")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
 
     const [result, setResult] = useState({})
     const [alert, setAlert] = useState({
@@ -36,7 +38,12 @@ function Login(props) {
                 isAlert: true,
                 alertMsg: `Successfully logged in! welcome back ${response.data.data.name}`,
                 alertType: "success"
+
             })
+            localStorage.setItem("loggedin", true)
+            localStorage.setItem("data", JSON.stringify(response.data.data))
+            localStorage.setItem("usertype", currentState)
+            navigate("/profile/" + currentState)
         }
         else if (response.data.message) {
             setAlert({
@@ -53,7 +60,13 @@ function Login(props) {
             })
         }
     }
-
+    useEffect(() => {
+        const isLogged = localStorage.getItem("loggedin")
+        console.log(isLogged)
+        if (isLogged) {
+            navigate("/")
+        }
+    }, [])
     return (
         <>
             <Headerbar />
