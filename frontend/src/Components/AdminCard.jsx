@@ -1,21 +1,34 @@
-function AdminCard(props){
+function AdminCard(props) {
     return (
         <>
-            <div className="card" style={{width: '18rem'}}>
-                <img src="/img/AdminPic.jpg" className="card-img-top" alt="" style={{height:'300px'}}/>
-                    <div className="card-body">
-                        <h5 className="card-title">{props.admin.name}</h5>
-                    
+            
+            <div class="container " style={{border: '1px solid yellow', width:'50vh', margin:'0', padding:'0'}}>
+                <div class="row justify-content-center " >
+                    <div class="col-md-6 col-lg-5 col-12 d-flex " style={{border: '1px solid black', }} >
+                        <div class="team-item " style={{border: '1px solid red', }}>
+                            <div class="mb-30 position-relative align-items-center">
+                                <span class="socials d-inline-block">
+                                {/* <i class=" zmdi bi-envelope-at-fill"></i> */}
+                                <a href="#" class="zmdi zmdi-home"></a>
+
+                                    <a href="#" class="zmdi zmdi-email"></a>
+                                    <a href="#" class="zmdi zmdi-phone"></a>
+                                    <a href="#" class="zmdi zmdi-comment"></a>
+                                </span>
+                                <span class="img-holder d-inline-block">
+                                    <img src="/img/AdminPic.jpg" alt="Team" />
+                                </span>
+                            </div>
+                            <div class="team-content">
+                                <h5 class="mb-2">{props.admin.name}</h5>
+                                <p class="text-uppercase mb-0"></p>
+                            </div>
+                        </div>
                     </div>
-                    <ul className="list-group list-group-flush">
-                        
-                        <li className="list-group-item">{props.admin.email}</li>
-                       
-                    </ul>
-                    <div className="card-body">
-                        <a href="#" className="card-link">{props.admin.password}</a>
-                        {/* <a href="#" className="card-link">Another link</a> */}
-                    </div>
+
+
+
+                </div>
             </div>
         </>
     );

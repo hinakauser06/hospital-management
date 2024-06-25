@@ -24,7 +24,9 @@ import Login from './pages/Login';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 // for patientprofile
 
-import PatientProfile from './pages/profile/PatientProfile';
+import Patient from './pages/profile/Patient';
+import Doctor from './pages/profile/Doctor';
+import Admin from './pages/profile/Admin';
 
 
 
@@ -63,8 +65,16 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
+    path: "/profile/admin",
+    element: <Admin/>,
+  },
+  {
+    path: "/profile/doctor",
+    element: <Doctor/>,
+  },
+  {
     path: "/profile/patient",
-    element: <PatientProfile/>,
+    element: <Patient/>,
   }
 
 ]);

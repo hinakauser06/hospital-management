@@ -1,4 +1,4 @@
-import React , { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminCard from "../../Components/AdminCard";
@@ -21,11 +21,16 @@ function AdminList(props) {
     }
     return (
         <>
-        <Headerbar/>
-            <div className="App">
-                <button onClick={redirect}>Add Admin</button>
-                {adminResponse.map((admin) => (<AdminCard admin={admin} />
-                ))}
+            <Headerbar />
+            <div className="body">
+                <div className="btn-add" style={{ border: '2px solid black' }}>
+                    <button className='btn btn-outline-dark  ' id='button' onClick={redirect}>Add Admin</button>
+
+                </div>
+                <div style={{ border: '3px solid red'  }}>
+                    {adminResponse.map((admin) => (<AdminCard admin={admin} />
+                    ))}
+                </div>
             </div>
         </>
     );

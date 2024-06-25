@@ -41,18 +41,18 @@ function DoctorList(props) {
         <>
         <Headerbar/>
 
-        <div className="App">
-            <button onClick={redirect}>Add Doctor</button>
-            {doctorResponse.map((doc) => (
-                <DoctorCard doctor={doc} />
-            ))}
+        <div className="body">
+                <div className="btn-add" style={{ border: '2px solid black' }}>
+                    <button className='btn btn-outline-dark  ' id='button' onClick={redirect}>Add Doctor</button>
 
-            {/* {patientResponse.map((item) => (
-                <PatientCard patients={item} />
-            ))}
+                </div>
+                <div style={{ border: '3px solid red', display: 'flex' }} className="p-2 ">
+                    {doctorResponse.map((doc) => (<DoctorCard doctor={doc} />
+                    ))}
+                </div>
+            </div>
 
-            {console.log(patientResponse)} */}
-        </div>
+       
 </>
     );
 }
