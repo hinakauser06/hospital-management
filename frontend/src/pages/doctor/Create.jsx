@@ -8,9 +8,8 @@ function DoctorCreate(props) {
             name: name,
             email: email,
             password: password,
-            speciality: speciality,
-            experience: experience,
-            gender: gender,
+            dept: dept,
+
             phone: phone
 
         })
@@ -19,9 +18,7 @@ function DoctorCreate(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [speciality, setSpeciality] = useState("");
-    const [experience, setExperience] = useState("");
-    const [gender, setGender] = useState("");
+    const [dept, setDept] = useState("sexlogist");
     const [phone, setPhone] = useState("");
     const createDoctor = async () => {
 
@@ -31,9 +28,7 @@ function DoctorCreate(props) {
         setName("")
         setEmail("")
         setPassword("")
-        setSpeciality("")
-        setExperience("")
-        setGender("")
+        setDept("")
         setPhone("")
         return navigate("/doctor/list")
     }
@@ -43,85 +38,65 @@ function DoctorCreate(props) {
             <body className='container body'>
                 <h2 style={{ textAlign: "center" }}>
                     <i className="fas fa-stethoscope"></i> Doctor Create</h2>
-                <div className='box' style={{border:'1px solid black'}} >
-                    <div class="row mx-2 p-1" >
-                        <div className='col-3'>
-                            <label for="name" class="col-form-label">Name: </label>
-                        </div>
-                        <div className='col-7'>
-                            <input type="text" class="form-control" value={name} placeholder='Enter your name' onChange={(event) => setName(event.target.value)} required />
 
-                        </div>
+                <div class="row mx-2 p-1" >
+                    <div className='col-1'>
+                        <label for="name" class="col-form-label">Name: </label>
                     </div>
+                    <div className='col-3'>
+                        <input type="text" class="form-control" value={name} placeholder='Enter your name' onChange={(event) => setName(event.target.value)} required />
 
-                    <div class="row mx-2 p-1" >
-                        <div className='col-3'>
-                            <label for="email" class="col-form-label">Email: </label>
-                        </div>
-                        <div className='col-7'>
-                            <input type="email" class="form-control" value={email} placeholder='Enter your name' onChange={(event) => setEmail(event.target.value)} />
-
-                        </div>
                     </div>
+                </div>
 
-                    <div className='row mx-2 p-1'>
-                        <div class="col-3">
-                            <label for="password" class="col-form-label">Password: </label>
-                        </div>
-                        <div class="col-7">
-                            <input type="password" class="form-control" value={password} placeholder='Enter your password' onChange={(event) => setPassword(event.target.value)} />
-                        </div>
+                <div class="row mx-2 p-1" >
+                    <div className='col-1'>
+                        <label for="email" class="col-form-label">Email: </label>
                     </div>
+                    <div className='col-3'>
+                        <input type="email" class="form-control" value={email} placeholder='Enter your name' onChange={(event) => setEmail(event.target.value)} />
 
-                    <div className='row mx-2 p-1'>
-                        <div class="col-3">
-                            <label for="speciality" class="col-form-label">Speciality: </label>
-                        </div>
-                        <div class="col-7">
-                            <input type="text" class="form-control" value={speciality} placeholder='Enter your speciality' onChange={(event) => setSpeciality(event.target.value)} />
-                        </div>
                     </div>
+                </div>
 
-                    <div className='row mx-2 p-1'>
-                        <div class="col-3">
-                            <label for="experience" class="col-form-label">Experience: </label>
-                        </div>
-                        <div class="col-7">
-                            <input type="text" class="form-control" value={experience} placeholder='Enter your experience' onChange={(event) => setExperience(event.target.value)} />
-                        </div>
+                <div className='row mx-2 p-1'>
+                    <div class="col-1">
+                        <label for="password" class="col-form-label">Password: </label>
                     </div>
+                    <div class="col-3">
+                        <input type="password" class="form-control" value={password} placeholder='Enter your password' onChange={(event) => setPassword(event.target.value)} />
+                    </div>
+                </div>
 
-                    <div className='row mx-2 p-1'>
-                        <label className="form-label col-2">Gender</label>
-                        <div className="form-check col-1 mx-5" >
-                            <input className="form-check-input  " type="radio" name="gender" id="male" value={gender} onChange={(event) => setGender(event.target.value)} />
-                            <label className="form-check-label " htmlFor="male">
-                                Male
-                            </label>
-                        </div>
+                <div className='row mx-2 p-1'>
+                    <div class="col-1">
+                        <label for="dept" class="col-form-label">Dept: </label>
+                    </div>
+                    <div class="col-3">
 
-                        <div className="form-check col-2">
-                            <input className="form-check-input" type="radio" name="gender" id="female" value={gender} onChange={(event) => setGender(event.target.value)} />
-                            <label className="form-check-label" htmlFor="female">
-                                Female
-                            </label>
-                        </div>
-                    </div>
-                    <div className='row mx-2 p-1'>
-                        <div class="col-3">
-                            <label for="phone" class="col-form-label">Phone: </label>
-                        </div>
-                        <div class="col-7">
-                            <input type="number" class="form-control" value={phone} placeholder='Enter your phone' onChange={(event) => setPhone(event.target.value)} />
-                        </div>
-                    </div>
-                    <div className='btn-create' >
-                        <input type="reset" value="Reset" className='btn btn-outline-dark ' id='button' />
-                        <button onClick={createDoctor} className='btn btn-outline-dark ' id="button">Create Doctor</button>
+                        <select  value={dept} class="form-select" aria-label="Default select example" onChange={(event)=>setDept(event.target.value)}>
+                            <option selected>Dept</option>
+                            <option value="neurologist">NeuroLogist</option>
+                            <option value="gynologist">Gynologist</option>
+                            <option value="sexlogist">SexLogist</option>
+                        </select>
+
+
+                        {/* <input type="text" class="form-control" value={dept} placeholder='Enter your dept' onChange={(event) => setDept(event.target.value)}  /> */}
                     </div>
                 </div>
 
 
+                <div className='row mx-2 p-1'>
+                    <div class="col-1">
+                        <label for="phone" class="col-form-label">Phone: </label>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" class="form-control" value={phone} placeholder='Enter your phone' onChange={(event) => setPhone(event.target.value)} />
+                    </div>
+                </div>
+                <input type="reset" value="Reset" className='btn btn-outline-dark' id='button' />
+                <button onClick={createDoctor} className='btn btn-outline-dark' id="button">Create Doctor</button>
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
