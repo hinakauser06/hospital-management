@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react"
 import Headerbar from "../../Components/Headerbar"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 function Patient(props) {
     const [data, setData] = useState({})
     const navigate = useNavigate();
+    const [appointmentList, setappointmentList] = useState([])
+    const apiCall = async () => {
+        const response = await axios.get("http://localhost:5000/appointment")
+        setappointmentList(response)
+        console.log(response)
+    }
+
 
     useEffect(() => {
         const isLogged = localStorage.getItem("loggedin")
@@ -12,14 +20,17 @@ function Patient(props) {
             let userdata = localStorage.getItem("data")
             console.log(userdata)
             userdata = JSON.parse(userdata)
+            // console.log(userdata)
             setData(userdata)
+            apiCall()
+
 
         }
         else {
 
             navigate("/login")
         }
-
+        return () => { }
     }, [])
 
 
@@ -97,7 +108,9 @@ function Patient(props) {
                         {data.age}
                     </div>
                 </div>
+                <button className="btn btn-success btn-lg" onClick={() => navigate("/appointment/create")}>Book Appoinment</button>
 
+                <div className="container"></div>
             </body>
         </>
     )

@@ -28,7 +28,10 @@ import Patient from './pages/profile/Patient';
 import Doctor from './pages/profile/Doctor';
 import Admin from './pages/profile/Admin';
 
-
+import CreateAppointment from "./pages/appointment/Create"
+import AppointmentList from "./pages/appointment/List"
+import AppointmentSchedule from './pages/appointment/AppointmentSchedule';
+import AssignedPatient from './pages/doctor/AssignedPatient';
 
 
 const router = createBrowserRouter([
@@ -75,6 +78,22 @@ const router = createBrowserRouter([
   {
     path: "/profile/patient",
     element: <Patient/>,
+  },
+  {
+    path: "/appointment/create",
+    element: <CreateAppointment />,
+  },
+  {
+    path: "/appointment/list",
+    element: <AppointmentList />,
+  },
+  {
+    path: "/appointment/appointmentSchedule",
+    element: <AppointmentSchedule />,
+  },
+  {
+    path: "/doctor/AssignedPatient",
+    element: <AssignedPatient />,
   }
 
 ]);

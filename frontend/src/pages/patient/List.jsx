@@ -22,13 +22,25 @@ function PatientList(props) {
         return navigate("/patient/create");
     }
     return (
-        <>        <Headerbar/>
+        <>
+            <Headerbar />
+            <dic className="container">
 
-        <div className="App">
-            <button onClick={redirect}>Add Patient</button>
-            {patientResponse.map((item) => (<PatientCard patient={item} />
-            ))}
-        </div>
+
+                <div className="row">
+                    <div className="btn-add" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h3 className="text-center">Patient List</h3>
+                        <button className='btn btn-outline-dark' id='button' onClick={redirect}>Add Patient</button>
+                    </div>
+
+                    {patientResponse.map((item) => (
+                        <div className="col-sm-12 col-md-3">
+                            <PatientCard patient={item} />
+                        </div>
+                    ))}
+
+                </div>
+            </dic>
         </>
     );
 }

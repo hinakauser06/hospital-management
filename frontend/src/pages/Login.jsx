@@ -70,15 +70,12 @@ function Login(props) {
     return (
         <>
             <Headerbar />
-            <div className="container my-5" >
-
+            <div className="container  body" >
                 {alert.isAlert && <div className={`alert alert-${alert.alertType} alert-dismissible fade show my-1`} role="alert">
                     {alert.alertMsg}
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>}
-
-
-                <ul className="nav nav-pills nav-fill">
+                <ul className="nav nav-pills nav-fill py-3 mx-5 px-5">
                     <li className="nav-item">
                         <a className={currentState === 'admin' ? 'nav-link active' : 'nav-link'} aria-current="page" onClick={() => changeState('admin')} >Admin</a>
                     </li>
@@ -88,22 +85,30 @@ function Login(props) {
                     <li className="nav-item">
                         <a className={currentState === 'patient' ? 'nav-link active' : 'nav-link'} onClick={() => changeState('patient')} >Patient</a>
                     </li>
-
                 </ul>
+                <div className="container text-end" >
+                    <div className="row my-2" >
+                        <div className="col-4" >
+                            <label className="form-label">Email address</label>
+                        </div>
+                        <div className="col-4" >
+                            <input type="email" value={email} className="form-control " onChange={(event) => setEmail(event.target.value)} />
 
-                <div className="mb-3">
-                    <label className="form-label">Email address</label>
-                    <input type="email" value={email} className="form-control" onChange={(event) => setEmail(event.target.value)} />
+                        </div>
+                    </div>
+                    <div className="row ">
+                        <div className="col-4" >
+                            <label className="form-label">Password</label>
+                        </div>
+                        <div className="col-4" >
+                            <input type="password" value={password} className="form-control" onChange={(event) => setPassword(event.target.value)} />
+                        </div>
+                    </div>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input type="password" value={password} className="form-control" onChange={(event) => setPassword(event.target.value)} />
+                <div className="text-center  my-3" >
+                    <button type="submit" className="btn btn-primary" onClick={loginuser}>Submit</button>
+                </div>
 
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={loginuser}>Submit</button>
-                <div>
-                    {/* {JSON.stringify(result)} */}
-                </div>
             </div>
         </>
 

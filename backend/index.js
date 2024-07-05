@@ -30,19 +30,34 @@ app.get('/', (req, res) => {
 
 })
 
-const DoctorModel = mongoose.model('doctor', { name: String,email: String, experience: String, gender: String, phone: String, password: String, speciality: String });
+const DoctorModel = mongoose.model('doctor', { name: String, email: String, password: String, dept: String, phone: String, });
 // getting all doctor list get request
 app.get('/doctor', cors(), async (req, res) => {
+
+    // // for filter
+    // try {
+    //     const filters = {}
+    //     if (req.query.name) {
+    //         filters.name = req.query.name
+    //     }
+    //     const doctor = await DoctorModel.find(filters)
+    //     res.json(doctor)
+    // }
+    // catch (err) {
+    //     res.status(5000).json({ message: err.message })
+    // }
+    //
     const data = await DoctorModel.find()
     console.log(data)
     res.json(data)
 })
 
 app.post('/doctor', cors(), async (req, res) => {
+
     console.log("request", req.body);
-    const { name, email, password, speciality, experience, gender, phone } = req.body;
+    const { name, email, password, dept, phone } = req.body;
     const doctorObj = new DoctorModel({
-        name: name, email: email, password: password, speciality: speciality, experience: experience, gender: gender, phone: phone
+        name: name, email: email, password: password, dept: dept, phone: phone
     })
     const result = await doctorObj.save()
     // console.log(result)
@@ -52,7 +67,7 @@ app.post('/doctor', cors(), async (req, res) => {
 
 // for patient
 
-const PatientModel = mongoose.model('patient', { name: String,email: String, password: String, problem: String, experience: Number, gender: String, age: Number });
+const PatientModel = mongoose.model('patient', { name: String, email: String, password: String, problem: String, experience: Number, gender: String, age: Number });
 
 app.get('/patient', cors(), async (req, res) => {
     const data = await PatientModel.find()
@@ -62,7 +77,7 @@ app.get('/patient', cors(), async (req, res) => {
 
 app.post('/patient', cors(), async (req, res) => {
     console.log("request", req.body);
-    const { name,email, password, problem, experience, gender, age } = req.body;
+    const { name, email, password, problem, experience, gender, age } = req.body;
     const patientObj = new PatientModel({
         name: name, email: email, password: password, problem: problem, experience: experience, gender: gender, age: age
     })
@@ -71,6 +86,72 @@ app.post('/patient', cors(), async (req, res) => {
     res.json(result)
 })
 
+// for appointment
+const AppointmentModel = mongoose.model('appointment', { dept: String, problem: String, patientId: { type: mongoose.Schema.Types.ObjectId, ref: "patient" }, doctorId: { type: mongoose.Schema.Types.ObjectId, ref: "doctor" }, isAssigned: Boolean })
+app.post('/appointment', cors(), async (req, res) => {
+    const { dept, problem, patientId } = req.body;
+    const appointmentObj = new AppointmentModel({ dept: dept, problem: problem, patientId: patientId, isAssigned: false })
+    const result = await appointmentObj.save()
+    res.json(result)
+})
+
+app.get('/appointment', cors(), async (req, res) => {
+    try{
+    // const appointments = await AppointmentModel.aggregate([
+    //     {
+    //         $lookup: {
+    //             from: 'patients',
+    //             localField: 'patientId',
+    //             foreignField: '_id',
+    //             as : 'patient'
+    //         }
+    //     },
+    //     {
+            
+    //             $lookup: {
+    //                 from: 'doctors',
+    //                 localField: 'doctorId',
+    //                 foreignField: '_id',
+    //                 as: 'doctor'
+    //             }
+            
+
+    //     },
+    //     {
+    //         $unwind: '$patient'
+    //     },
+    //     {
+    //         $unwind: '$doctor'
+    //     }
+    // ])
+    const appointments = await AppointmentModel.find().populate("patientId") 
+    res.json(appointments)
+}
+catch(error){
+console.error('Eror fetching appointments: ', error)
+res.status(500).send('server error')
+}   
+   
+
+})
+
+// for assignedPatient
+
+app.get('/appointment/doctorId', cors(), async (req, res)=>{
+    const doctorId =    req.params.doctorId
+    try {
+        const filter = {}
+
+        if (req.query.doctorId) {
+            filter.doctorId = req.query.doctorId
+        }
+        const data = await AppoinmentModel.find(filter).populate("patientId")
+        res.json(data)
+    }
+    catch (err) {
+        res.status(5000).json({ message: err.message })
+    }
+})
 // for admin
 const AdminModel = mongoose.model('admin', { name: String, email: String, password: String, });
 
@@ -90,7 +171,17 @@ app.post('/admin', cors(), async (req, res) => {
     console.log(result)
     res.json(result)
 })
-
+// admin/doctor
+app.patch('/admin/doctor-assign', cors(), async (req, res) => {
+    const { appointmentId, doctorId } = req.body
+    const appointment = await AppoinmentModel.findOne({ _id: appointmentId })
+    if (appointment) {
+        appointment.doctorId = doctorId
+        appointment.isAssigned = true
+        appointment.save()
+    }
+    res.json(appointment)
+})
 
 app.post('/login', cors(), async (req, res) => {
     // console.log("request", req.body);
@@ -169,6 +260,7 @@ app.post('/login', cors(), async (req, res) => {
 // this should be always in last
 
 app.listen(port, () => {
+
     console.log(`Example app listening on port ${port}`)
 })
 

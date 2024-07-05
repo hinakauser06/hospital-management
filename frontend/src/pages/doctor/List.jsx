@@ -18,7 +18,7 @@ function DoctorList(props) {
         const response = await axios.get('http://localhost:5000/doctor')
         console.log(response)
         setdoctorResponse(response.data)
-
+        //   console.log(setdoctorResponse)
         // const response1 = await axios.get('http://localhost:5000/patients')
         // console.log(response1)
         // setpatientResponse(response1.data)
@@ -39,21 +39,32 @@ function DoctorList(props) {
 
     return (
         <>
-        <Headerbar/>
+            <Headerbar />
+            
+            
 
-        <div className="body">
-                <div className="btn-add" style={{ border: '2px solid black' }}>
-                    <button className='btn btn-outline-dark  ' id='button' onClick={redirect}>Add Doctor</button>
+                <div className="container">
+                    <div className="btn-add" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3 className="text-center">Doctors List</h3>
+                        <button className='btn btn-outline-dark ' id='button' onClick={redirect}>Add Doctor</button>
+                    </div>
+
+                    <div className="row">
+                        {doctorResponse.map((doc) => (
+                            <div className="col-sm-12 col-md-4">
+                                <DoctorCard doctor={doc} />
+                            </div>
+                        ))}
+                    </div>
+
+
 
                 </div>
-                <div style={{ border: '3px solid red', display: 'flex' }} className="p-2 ">
-                    {doctorResponse.map((doc) => (<DoctorCard doctor={doc} />
-                    ))}
-                </div>
-            </div>
 
-       
-</>
+            
+
+
+        </>
     );
 }
 export default DoctorList

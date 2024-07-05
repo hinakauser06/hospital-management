@@ -6,6 +6,7 @@ function Headerbar(props) {
     function logOut(){
         localStorage.clear()
         setLoggedin(false)
+        navigate('/')
     }
     function ProfileRedirect(){
          

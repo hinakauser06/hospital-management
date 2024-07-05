@@ -22,13 +22,16 @@ function AdminList(props) {
     return (
         <>
             <Headerbar />
-            <div className="body">
-                <div className="btn-add" style={{ border: '2px solid black' }}>
+            <div className="container body">
+                <div className="btn-add" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3 className="text-center">Admin List</h3>
                     <button className='btn btn-outline-dark  ' id='button' onClick={redirect}>Add Admin</button>
-
                 </div>
-                <div style={{ border: '3px solid red'  }}>
-                    {adminResponse.map((admin) => (<AdminCard admin={admin} />
+                <div className="row" >
+                    {adminResponse.map((admin) => (
+                        <div className="col-sm-12 col-md-4">
+                            <AdminCard admin={admin} />
+                        </div>
                     ))}
                 </div>
             </div>

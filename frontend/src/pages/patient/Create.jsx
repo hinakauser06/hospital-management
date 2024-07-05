@@ -7,7 +7,7 @@ import Headerbar from "../../Components/Headerbar";
 
 function PatientCreate(props) {
     const apiCall = async () => {
-        const response = await axios.post("http://localhost:5000/patient", {
+                const response = await axios.post("http://localhost:5000/patient", {
             name: name,
             email: email,
             password: password,
@@ -26,7 +26,35 @@ function PatientCreate(props) {
    
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
-    const createPatient = async () => {
+    const [errors, setErrors] = useState({})
+    const createPatient = async (event) => {
+// for validation
+event.preventDefault();
+    const validationErrors = {};
+
+    if (!name) {
+        validationErrors.name = "Name is required";
+    }
+    if (!email) {
+        validationErrors.email = "Email is required";
+    }
+    else if (!/\S+@\S+\.\S+/.test(email)) {
+        validationErrors.email = "Email format is invalid";
+    }
+    if (!password) {
+        validationErrors.password = "Password is required";
+    }
+    if (!phone) {
+        validationErrors.phone = "Phone Number is required";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+    }
+
+
+// end of validation
         await apiCall();
         setName("")
         setEmail("")
@@ -52,6 +80,7 @@ function PatientCreate(props) {
                         </div>
                         <div className="col-3">
                             <input type="text" value={name} className="form-control" placeholder="Enter your name" onChange={(event) => setName(event.target.value)} required />
+                            {errors.name && <span className="text-danger">{errors.name}</span>}
 
                         </div>
                     </div>
@@ -62,6 +91,7 @@ function PatientCreate(props) {
                         </div>
                         <div className="col-3">
                             <input type="email" value={email} className="form-control" placeholder="Enter your email" onChange={(event) => setEmail(event.target.value)}  />
+                            {errors.email && <span className="text-danger">{errors.email}</span>}
 
                         </div>
                     </div>
@@ -72,6 +102,7 @@ function PatientCreate(props) {
                         </div>
                         <div className="col-3">
                             <input type="password" value={password} className="form-control" placeholder="Enter your password" onChange={(event) => setPassword(event.target.value)} required />
+                            {errors.password && <span className="text-danger">{errors.password}</span>}
 
                         </div>
                     </div>
@@ -113,6 +144,8 @@ function PatientCreate(props) {
                         </div>
                         <div className="col-3">
                             <input type="number" value={phone} className="form-control" placeholder="your phone" onChange={(event) => setPhone(event.target.value)} />
+                            {errors.phone && <span className="text-danger">{errors.phone}</span>}
+
                         </div>
                     </div>
 

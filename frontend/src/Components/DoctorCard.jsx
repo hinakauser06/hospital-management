@@ -2,17 +2,13 @@
 function DoctorCard(props) {
     return (
         <>
-           
-            <div class="container " style={{border: '1px solid black'}}>
-
+            <div class="container " >
                 <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-5 mb-30">
-                        <div class="team-item" style={{border: '1px solid black'}}>
-                            <div class="mb-30 position-relative d-grid align-items-center">
+                    <div class="mb-30 d-flex">
+                        <div class="team-item" >
+                            <div class="mb-30   align-items-center">
                                 <span class="socials d-inline-block">
-                                {/* <i class=" zmdi bi-envelope-at-fill"></i> */}
-                                <a href="#" class="zmdi zmdi-home"></a>
-
+                                    {/* <a href="#" class="zmdi zmdi-home"></a> */}
                                     <a href="#" class="zmdi zmdi-email"></a>
                                     <a href="#" class="zmdi zmdi-phone"></a>
                                     <a href="#" class="zmdi zmdi-comment"></a>
@@ -27,9 +23,6 @@ function DoctorCard(props) {
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </>

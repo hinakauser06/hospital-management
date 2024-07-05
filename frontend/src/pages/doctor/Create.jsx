@@ -18,12 +18,35 @@ function DoctorCreate(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [dept, setDept] = useState("sexlogist");
+    const [dept, setDept] = useState("physician");
     const [phone, setPhone] = useState("");
-    const createDoctor = async () => {
+    const [errors, setErrors] = useState({})
+    const createDoctor = async (event) => {
+// for validation
+event.preventDefault();
+    const validationErrors = {};
 
+    if (!name) {
+        validationErrors.name = "Name is required";
+    }
+    if (!email) {
+        validationErrors.email = "Email is required";
+    }
+    else if (!/\S+@\S+\.\S+/.test(email)) {
+        validationErrors.email = "Email format is invalid";
+    }
+    if (!password) {
+        validationErrors.password = "Password is required";
+    }
+    if (!phone) {
+        validationErrors.phone = "Phone Number is required";
+    }
 
-
+    if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+    }
+// end of validation
         await apiCall();
         setName("")
         setEmail("")
@@ -45,6 +68,7 @@ function DoctorCreate(props) {
                     </div>
                     <div className='col-3'>
                         <input type="text" class="form-control" value={name} placeholder='Enter your name' onChange={(event) => setName(event.target.value)} required />
+                        {errors.name && <span className="text-danger">{errors.name}</span>}
 
                     </div>
                 </div>
@@ -55,6 +79,7 @@ function DoctorCreate(props) {
                     </div>
                     <div className='col-3'>
                         <input type="email" class="form-control" value={email} placeholder='Enter your name' onChange={(event) => setEmail(event.target.value)} />
+                        {errors.email && <span className="text-danger">{errors.email}</span>}
 
                     </div>
                 </div>
@@ -65,6 +90,8 @@ function DoctorCreate(props) {
                     </div>
                     <div class="col-3">
                         <input type="password" class="form-control" value={password} placeholder='Enter your password' onChange={(event) => setPassword(event.target.value)} />
+                        {errors.password && <span className="text-danger">{errors.password}</span>}
+
                     </div>
                 </div>
 
@@ -74,15 +101,20 @@ function DoctorCreate(props) {
                     </div>
                     <div class="col-3">
 
-                        <select  value={dept} class="form-select" aria-label="Default select example" onChange={(event)=>setDept(event.target.value)}>
+                        <select value={dept} class="form-select" aria-label="Default select example" onChange={(event) => setDept(event.target.value)}>
                             <option selected>Dept</option>
-                            <option value="neurologist">NeuroLogist</option>
+                            <option value="physician">Physician</option>
+                            <option value="neurologist">Neurologist</option>
                             <option value="gynologist">Gynologist</option>
-                            <option value="sexlogist">SexLogist</option>
+                            <option value="andrologist">Andrologist</option>
+                            <option value="sexologist">SexoLogist</option>
+                            <option value="dermatologist">Dermatologist</option>
+                            <option value="cardiologist">Cardiologist</option>  {/*heart*/}
+                            <option value="oncologists">Oncologists</option>  {/*cancer*/}
+                            <option value="ophthalmologists">Ophthalmologists</option>  {/*eye*/}
                         </select>
 
 
-                        {/* <input type="text" class="form-control" value={dept} placeholder='Enter your dept' onChange={(event) => setDept(event.target.value)}  /> */}
                     </div>
                 </div>
 
@@ -93,35 +125,12 @@ function DoctorCreate(props) {
                     </div>
                     <div class="col-3">
                         <input type="number" class="form-control" value={phone} placeholder='Enter your phone' onChange={(event) => setPhone(event.target.value)} />
+                        {errors.phone && <span className="text-danger">{errors.phone}</span>}
+
                     </div>
                 </div>
                 <input type="reset" value="Reset" className='btn btn-outline-dark' id='button' />
                 <button onClick={createDoctor} className='btn btn-outline-dark' id="button">Create Doctor</button>
-                <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/img/hospitalGroupphoto.jpg" class="d-block w-100 h-50" alt="..." />
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/img/Patient&Doctor.png" class="d-block w-100" alt="..." />
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/img/Patient&Doctor1.jpg" class="d-block w-100" alt="..." />
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-
-
-
-
             </body >
 
 
