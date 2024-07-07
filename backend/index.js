@@ -34,22 +34,22 @@ const DoctorModel = mongoose.model('doctor', { name: String, email: String, pass
 // getting all doctor list get request
 app.get('/doctor', cors(), async (req, res) => {
 
-    // // for filter
-    // try {
-    //     const filters = {}
-    //     if (req.query.name) {
-    //         filters.name = req.query.name
-    //     }
-    //     const doctor = await DoctorModel.find(filters)
-    //     res.json(doctor)
-    // }
-    // catch (err) {
-    //     res.status(5000).json({ message: err.message })
-    // }
-    //
-    const data = await DoctorModel.find()
-    console.log(data)
-    res.json(data)
+    // for filter
+    try {
+        const filters = {}
+        if (req.query.dept) {
+            filters.dept = req.query.dept
+        }
+        const doctor = await DoctorModel.find(filters)
+        res.json(doctor)
+    }
+    catch (err) {
+        res.status(5000).json({ message: err.message })
+    }
+    
+    // const data = await DoctorModel.find()
+    // console.log(data)
+    // res.json(data)
 })
 
 app.post('/doctor', cors(), async (req, res) => {
@@ -124,7 +124,7 @@ app.get('/appointment', cors(), async (req, res) => {
     //         $unwind: '$doctor'
     //     }
     // ])
-    const appointments = await AppointmentModel.find().populate("patientId") 
+    const appointments = await AppointmentModel.find().populate("patientId").populate("doctorId")
     res.json(appointments)
 }
 catch(error){
@@ -138,14 +138,14 @@ res.status(500).send('server error')
 // for assignedPatient
 
 app.get('/appointment/doctorId', cors(), async (req, res)=>{
-    const doctorId =    req.params.doctorId
+    const doctorId =    req.params.doctorId 
     try {
         const filter = {}
 
         if (req.query.doctorId) {
             filter.doctorId = req.query.doctorId
         }
-        const data = await AppoinmentModel.find(filter).populate("patientId")
+        const data = await AppointmentModel.find(filter).populate("patientId")
         res.json(data)
     }
     catch (err) {
@@ -174,7 +174,7 @@ app.post('/admin', cors(), async (req, res) => {
 // admin/doctor
 app.patch('/admin/doctor-assign', cors(), async (req, res) => {
     const { appointmentId, doctorId } = req.body
-    const appointment = await AppoinmentModel.findOne({ _id: appointmentId })
+    const appointment = await AppointmentModel.findOne({ _id: appointmentId })
     if (appointment) {
         appointment.doctorId = doctorId
         appointment.isAssigned = true

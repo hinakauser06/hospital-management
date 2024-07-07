@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Headerbar from '../../Components/Headerbar';
 export default function Create() {
@@ -7,19 +7,27 @@ export default function Create() {
     const apiCall = async () => {
         const response = await axios.post("http://localhost:5000/appointment", {
             dept: dept,
-            problem: problemDetail
+            problem: problemDetail,
+            patientId: data._id
+            
         })
     }
     const navigate = useNavigate();
-    const [dept, setDept] = useState("sexlogist");
+    const [dept, setDept] = useState("");
     const [problemDetail, setProblemDetail] = useState("");
-    
+    const [data, setData] = useState()
     const createAppoinment = async () => {
         await apiCall();
         setDept("")
         setProblemDetail("")
         return navigate("/profile/patient")
     }
+    useEffect(()=>{
+        let userdata = localStorage.getItem("data")
+        userdata = JSON.parse(userdata)
+        console.log(userdata)
+        setData(userdata)
+    },[])
 
     return <>
         <Headerbar />

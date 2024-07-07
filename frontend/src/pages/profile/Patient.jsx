@@ -89,17 +89,12 @@ function Patient(props) {
                         {data.phone}
                     </div>
                 </div>
-
-
                 <div className='row mx-2 p-1 '>
                     <label className="form-label col-1">Gender</label>
                     <div className="form-check col-1 ms-2">
                         {data.gender}
                     </div>
                 </div>
-
-
-
                 <div className="row mx-2 p-1">
                     <div className="col-1">
                         <label for="age" className="col-form-label">Age: </label>
@@ -109,7 +104,14 @@ function Patient(props) {
                     </div>
                 </div>
                 <button className="btn btn-success btn-lg" onClick={() => navigate("/appointment/create")}>Book Appoinment</button>
-
+                {appointmentList && appointmentList.data && appointmentList.data.length>0 && appointmentList.data.map((e) => (
+                    <div style={{border: '2px solid black'}} >
+                        <h5>{e.dept} </h5>
+                        <h5>{e.problem} </h5>
+                        <h5>{e.isAssigned? "Yes" : "No"}  </h5>
+                        <h5>{e.isAssigned && e.doctorId.name }  </h5>
+                    </div>
+                ))}
                 <div className="container"></div>
             </body>
         </>
