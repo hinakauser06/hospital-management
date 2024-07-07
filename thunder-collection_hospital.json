@@ -1,0 +1,253 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "hospital",
+    "collectionId": "a9e11d98-586b-4f68-adef-17994269661b",
+    "dateExported": "2024-07-07T07:29:31.448Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "389ee6e0-588d-4413-8b91-01a723b1a788",
+            "name": "doctor",
+            "containerId": "",
+            "created": "2024-06-17T17:32:15.815Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "3117368d-c7eb-4b09-a2b2-36664bee5614",
+            "name": "patient",
+            "containerId": "",
+            "created": "2024-06-17T17:32:22.702Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "53902794-9cfb-4d58-97f3-50ce598768db",
+            "name": "admin",
+            "containerId": "",
+            "created": "2024-06-17T17:32:35.295Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "4f16be46-43de-461b-85c0-05a1b3226a5e",
+            "name": "appointment",
+            "containerId": "",
+            "created": "2024-06-26T17:51:32.061Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "2df623db-6241-4e7d-9f1f-0453e88db387",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "389ee6e0-588d-4413-8b91-01a723b1a788",
+            "name": "get list",
+            "url": "http://localhost:5000/doctor?dept=physician",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-17T17:32:52.580Z",
+            "modified": "2024-07-06T16:42:31.449Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "dept",
+                    "value": "physician",
+                    "isPath": false
+                },
+                {
+                    "name": "doctorId",
+                    "value": " 667cecc607a261536ddb2cf4",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "count",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "name",
+                    "value": "Hina",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "e815aa99-868b-4cdb-8b19-308d489b1958",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "389ee6e0-588d-4413-8b91-01a723b1a788",
+            "name": "add data",
+            "url": "localhost:5000/doctor",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-17T17:37:43.023Z",
+            "modified": "2024-06-23T07:10:23.995Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"name\": \"Farhat\",\n    \"email\": \"doctor@gmail.com\",\n    \"password\": \"234\",\n    \"dept\": \"dram\",\n    \n    \"phone\": \"787576868\"\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "f5bfb61d-83e1-45cc-bb57-69f35e614485",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "389ee6e0-588d-4413-8b91-01a723b1a788",
+            "name": "deleteDoctor",
+            "url": "localhost:5000/doctor",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-06-17T19:44:38.482Z",
+            "modified": "2024-06-17T19:45:02.442Z",
+            "headers": []
+        },
+        {
+            "_id": "800d51c0-66d3-4cdc-b154-f4b1b4e1237a",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "3117368d-c7eb-4b09-a2b2-36664bee5614",
+            "name": "get list",
+            "url": "localhost:5000/patient",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-06-18T10:47:21.320Z",
+            "modified": "2024-06-18T11:14:28.930Z",
+            "headers": []
+        },
+        {
+            "_id": "d8a2200e-3d8e-4c67-9950-9ac5f5948a1b",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "3117368d-c7eb-4b09-a2b2-36664bee5614",
+            "name": "add data",
+            "url": "localhost:5000/patient",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-06-18T11:23:34.001Z",
+            "modified": "2024-06-23T07:11:14.307Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Alia\",\n  \"email\": \"patient@gmail.com\",\n  \"password\": \"234\",\n  \"phone\": 273672576,\n  \"address\": \"yusfdgsdch\",\n  \"gender\": \"female\",\n  \"age\": \"30\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7ef300d6-d44a-4344-ae7c-6271bb51f008",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "53902794-9cfb-4d58-97f3-50ce598768db",
+            "name": "get list",
+            "url": "localhost:5000/admin",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-06-19T11:55:52.995Z",
+            "modified": "2024-06-19T11:56:13.849Z",
+            "headers": []
+        },
+        {
+            "_id": "e405ec8c-93f3-4f0e-8c22-968be93bd74a",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "53902794-9cfb-4d58-97f3-50ce598768db",
+            "name": "add data",
+            "url": "localhost:5000/admin",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-06-19T11:56:27.399Z",
+            "modified": "2024-06-23T07:08:33.852Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Kiran\",\n\n  \"email\": \"abc@gmail.com\",\n  \n  \"password\": \"123\"\n\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d4d10e4a-15c9-414e-81a6-d2428a71e835",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:5000/login",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-06-22T17:13:16.415Z",
+            "modified": "2024-06-22T18:11:03.849Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"usertype\": \"admin\",\n  \"email\": \"Huma@gmail.com\",\n  \"password\": \"123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "57334ad1-f4ee-4e22-8908-9e3cd2605beb",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "4f16be46-43de-461b-85c0-05a1b3226a5e",
+            "name": "createAppointment",
+            "url": "http://localhost:5000/appointment",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-06-26T17:52:13.509Z",
+            "modified": "2024-06-27T12:00:03.592Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"dept\": \"gynecologist\",\n  \"problem\": \"unknown\",\n  \"patientId\": \"667d44bd5323f4af54a2c326\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c6c48fd3-373c-49d4-8b72-4ce5019c87ff",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "4f16be46-43de-461b-85c0-05a1b3226a5e",
+            "name": "getAppointment",
+            "url": "http://localhost:5000/appointment",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-06-26T18:08:00.930Z",
+            "modified": "2024-07-06T13:40:02.168Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "patientId",
+                    "value": "667d43705323f4af54a2c2f2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "dept",
+                    "value": "sexology",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "dept",
+                    "value": "sexology",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "patientId",
+                    "value": "667d43705323f4af54a2c2f2",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "801149e8-f6f8-4ac3-b00c-57502f0d80cf",
+            "colId": "a9e11d98-586b-4f68-adef-17994269661b",
+            "containerId": "53902794-9cfb-4d58-97f3-50ce598768db",
+            "name": "doctorAssigned",
+            "url": "http://localhost:5000/admin/doctor-assign",
+            "method": "PATCH",
+            "sortNum": 140000,
+            "created": "2024-06-26T18:53:44.388Z",
+            "modified": "2024-07-05T19:15:44.267Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appointmentId\": \"668843370b8dee76dec19ffa\",\n  \"doctorId\": \"667cecc607a261536ddb2cf4\"\n  \n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "4t_p2ypV6pNf98ZbMzIRq5e0qI0fyHNtCb45VJEuSO724TxDGPw4iwCK7xmLVImJNO-WO_xUIPIe6XS3W_riBg"
+}
