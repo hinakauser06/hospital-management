@@ -35,18 +35,20 @@ const DoctorModel = mongoose.model('doctor', { name: String, email: String, pass
 app.get('/doctor', cors(), async (req, res) => {
 
     // for filter
+    const dept = req.query.dept
     try {
-        const filters = {}
-        if (req.query.dept) {
-            filters.dept = req.query.dept
-        }
-        const doctor = await DoctorModel.find(filters)
+        // const filters = {}
+        // if (req.query.dept) 
+        // {
+        //     filters.dept = req.query.dept
+        // }
+        const doctor = await DoctorModel.find(dept ? { dept } : {})
         res.json(doctor)
     }
     catch (err) {
         res.status(5000).json({ message: err.message })
     }
-    
+
     // const data = await DoctorModel.find()
     // console.log(data)
     // res.json(data)
@@ -66,7 +68,10 @@ app.post('/doctor', cors(), async (req, res) => {
 })
 
 // for patient
+/* 
+1. need to add all function description
 
+*/
 const PatientModel = mongoose.model('patient', { name: String, email: String, password: String, problem: String, experience: Number, gender: String, age: Number });
 
 app.get('/patient', cors(), async (req, res) => {
@@ -94,51 +99,25 @@ app.post('/appointment', cors(), async (req, res) => {
     const result = await appointmentObj.save()
     res.json(result)
 })
+// for getting appointment list on front end on admin profile
 
 app.get('/appointment', cors(), async (req, res) => {
-    try{
-    // const appointments = await AppointmentModel.aggregate([
-    //     {
-    //         $lookup: {
-    //             from: 'patients',
-    //             localField: 'patientId',
-    //             foreignField: '_id',
-    //             as : 'patient'
-    //         }
-    //     },
-    //     {
-            
-    //             $lookup: {
-    //                 from: 'doctors',
-    //                 localField: 'doctorId',
-    //                 foreignField: '_id',
-    //                 as: 'doctor'
-    //             }
-            
-
-    //     },
-    //     {
-    //         $unwind: '$patient'
-    //     },
-    //     {
-    //         $unwind: '$doctor'
-    //     }
-    // ])
-    const appointments = await AppointmentModel.find().populate("patientId").populate("doctorId")
-    res.json(appointments)
-}
-catch(error){
-console.error('Eror fetching appointments: ', error)
-res.status(500).send('server error')
-}   
-   
-
+    try 
+    {
+        const appointments = await AppointmentModel.find().populate("patientId").populate("doctorId")
+        res.json(appointments)
+    }
+    catch (error) 
+    {
+        console.error('Eror fetching appointments: ', error)
+        res.status(500).send('server error')
+    }
 })
 
 // for assignedPatient
 
-app.get('/appointment/doctorId', cors(), async (req, res)=>{
-    const doctorId =    req.params.doctorId 
+app.get('/appointment/doctorId', cors(), async (req, res) => {
+    const doctorId = req.params.doctorId
     try {
         const filter = {}
 

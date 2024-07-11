@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Headerbar from "../Components/Headerbar"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 function Login(props) {
     const [currentState, setCurrentState] = useState("doctor")
@@ -110,6 +111,7 @@ function Login(props) {
                 </div>
 
             </div>
+            <Footer />
         </>
 
     )

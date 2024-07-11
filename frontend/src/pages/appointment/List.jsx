@@ -3,6 +3,7 @@ import Headerbar from "../../Components/Headerbar"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import AppointmentCard from "../../Components/AppointmentCard"
+import Footer from "../../Components/Footer"
 
 export default function AppointmentList(props) {
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ export default function AppointmentList(props) {
 
         <>
             <Headerbar />
-            <div className="container body">
+            <div className="container ">
                 <div className="btn-add" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h3 className="text-center">Appointment List</h3>
                 </div>
@@ -35,6 +36,7 @@ export default function AppointmentList(props) {
                     ))}
                 </div>
             </div>
+            <Footer/>
         </>
     )
 

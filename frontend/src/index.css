@@ -21,7 +21,7 @@ code {
   width: 100px;
 }
 .body {
-  background-color: rgb(107, 231, 184);
+  /* background-color: rgb(195, 211, 239); */
   height : 100vh;
 }
 .box{
@@ -41,7 +41,7 @@ code {
   text-align: center;
   margin: 10px;
   padding-top: 0;
-  background-color: rgb(62, 190, 141)
+  background-color:  rgb(74, 121, 202)
 }
 .card-row{
   width: 200px ;
@@ -55,7 +55,7 @@ body{margin-top:20px;
   
   /* ===== ABOUT PAGE ===== */
   .team-item {
-    padding: 35px;
+    padding: 15px;
     padding-right: 0;
     position: relative;
     z-index: 0;
@@ -83,7 +83,7 @@ body{margin-top:20px;
   .team-item:after {
     height: 6px;
     width: calc(100% - 30px);
-    background-color: #a2f18e;
+    background-color: rgb(141, 141, 237);
     left: 0;
     bottom: 0;
     -webkit-transition: all 0.3s linear;
@@ -100,8 +100,8 @@ body{margin-top:20px;
     -webkit-box-shadow: 0 0 20px 0 rgba(51, 51, 51, 0.2);
             box-shadow: 0 0 20px 0 rgba(51, 51, 51, 0.2);
     border-radius: 10px;
-    width: calc(100% - 50px);
-    margin-left: 50px;
+    width: calc(100% - 20px);
+    margin-left: 10px;
     overflow: hidden;
   }
   
@@ -153,6 +153,7 @@ body{margin-top:20px;
     transition: all 0.4s ease;
     font-weight: 600;
     font-size: 14px;
+    /* margin-left: 2px; */
   }
   
   .team-item:hover .team-content h5, .team-item:hover .team-content p {
@@ -197,3 +198,58 @@ body{margin-top:20px;
   .mb-30 {
       margin-bottom: 30px;
   }
+  /* for social icon in headbar */
+  .social-media-icons {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.social-media-icons li {
+    margin: 0 10px;
+}
+
+.social-media-icons a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-media-icons a:hover {
+    color: #ddd;
+}
+/* for footer heading */
+.footer-icon{
+   font-size: "20px";
+    color: "red" ;
+}
+.ul-decoration {
+  list-style-type: none;
+ 
+}
+.anchor-link{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+/* footer */
+.footer {
+  width: 100%; /* Full width */
+  background-color: rgb(72, 72, 189);
+  color: #fff;
+  text-align: center;
+}
+#profile{
+  height: 400px;
+  width: 400px;
+  border: 1px solid blue;
+  border-radius: 50%;
+}
+/* for patient profile collapse text color */
+.textColor{
+  color: red
+}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AdminCard from "../../Components/AdminCard";
 import Headerbar from "../../Components/Headerbar";
+import Footer from "../../Components/Footer";
 
 function AdminList(props) {
     const navigate = useNavigate();
@@ -22,19 +23,24 @@ function AdminList(props) {
     return (
         <>
             <Headerbar />
-            <div className="container body">
-                <div className="btn-add" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h3 className="text-center">Admin List</h3>
-                    <button className='btn btn-outline-dark  ' id='button' onClick={redirect}>Add Admin</button>
+            <div className="container">
+                <div className="row my-3">
+                    <div className="col-10">
+                        <h3 className="text-center" >Admin List</h3>
+                    </div>
+                    <div className="col-2">
+                        <button className='btn btn-outline-dark ' id='button' onClick={redirect} >Add Admin</button>
+                    </div>
                 </div>
                 <div className="row" >
                     {adminResponse.map((admin) => (
-                        <div className="col-sm-12 col-md-4">
+                        <div className="col-sm-12 col-md-3">
                             <AdminCard admin={admin} />
                         </div>
                     ))}
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

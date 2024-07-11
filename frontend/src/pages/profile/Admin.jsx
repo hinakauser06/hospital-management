@@ -6,10 +6,10 @@ function Admin(props) {
     const [data, setData] = useState({})
     const navigate = useNavigate();
     // for getting doctor list
-function DoctorList(){
+    function DoctorList() {
 
-}
-// end of function
+    }
+    // end of function
     useEffect(() => {
         const isLogged = localStorage.getItem("loggedin")
         if (isLogged) {
@@ -32,48 +32,42 @@ function DoctorList(){
     return (
         <>
             <Headerbar />
-
-
-            <body className="container body">
+            <body className="container ">
                 <div className="row">
-                    <div className="col-9 " >
-                        <h3 style={{ textAlign: "center" }} >
-                            <i className="bi bi-person"></i>  Welcome Back! {data.name}</h3>
-                        <div className="row mx-2 p-2">
-                            <div className="col-2">
-                                <label for="name" className="col-form-label">Admin Name:  </label>
-                            </div>
-                            <div className="col-3">
-                                {data.name}
-                            </div>
-                        </div>
 
-                        <div className="row mx-2 p-1">
-                            <div className="col-2">
-                                <label for="email" className="col-form-label">Admin Email: </label>
+                    <h3 style={{ textAlign: "center" }} >
+                        <i className="bi bi-person"></i>  Welcome Back! {data.name}
+                    </h3>
+                    <div className="col-8 p-3" >
+                        <div className="row mx-2 p-1 ">
+                            <div className="col-3">
+                                <label for="email" className="col-form-label">Email: </label>
                             </div>
                             <div className="col-3">
                                 {data.email}
                             </div>
                         </div>
-
-                        <div className="row mx-2 p-1">
-                            <div className="col-2">
-                                <label for="phone" className="col-form-label">Admin Phone: </label>
+                        <div className="row mx-2 p-1" >
+                            <div className="col-3">
+                                <label for="name" className="col-form-label">Working Hrs:  </label>
                             </div>
                             <div className="col-3">
-                                {data.phone}
+                                9 AM to 6 PM
                             </div>
                         </div>
-
+                        <div className="row">
+                        <div className="col-12 p-4">
+                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/doctor/list")}>Doctor List</button>
+                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/patient/list")}>Patient List</button>
+                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/appointment/list")}>Appointment Resquest</button>
+                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/appointment/appointmentSchedule")}>Appointment Status</button>
+                        </div>
                     </div>
-                    <div className="col-3">
-                    <button type="button" class="btn btn-outline-success m-2" onClick={()=>navigate("/doctor/list")}>Doctor List</button>
-                    <button type="button" class="btn btn-outline-success m-2" onClick={()=>navigate("/patient/list")}>Patient List</button>
-                    <button type="button" class="btn btn-outline-success m-2" onClick={()=>navigate("/appointment/list")}>Appointment Resquest</button>
-                    <button type="button" class="btn btn-outline-success m-2" onClick={()=>navigate("/appointment/appointmentSchedule")}>Appointment Status</button>
                     </div>
-
+                   
+                    <div className="col-4">
+                        <img src="/img/adminprofile.webp" alt="profile" id="profile" />
+                    </div>
                 </div>
 
 

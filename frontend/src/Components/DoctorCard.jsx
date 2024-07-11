@@ -7,19 +7,20 @@ function DoctorCard(props) {
                     <div class="mb-30 d-flex">
                         <div class="team-item" >
                             <div class="mb-30   align-items-center">
-                                <span class="socials d-inline-block">
-                                    {/* <a href="#" class="zmdi zmdi-home"></a> */}
+                                {/* <span class="socials d-inline-block">
+                                    <a href="#" class="zmdi zmdi-home"></a>
                                     <a href="#" class="zmdi zmdi-email"></a>
                                     <a href="#" class="zmdi zmdi-phone"></a>
                                     <a href="#" class="zmdi zmdi-comment"></a>
-                                </span>
+                                </span> */}
                                 <span class="img-holder d-inline-block">
                                     <img src="/img/doctorMale.png" alt="Team" />
                                 </span>
                             </div>
                             <div class="team-content">
                                 <h5 class="mb-2">{props.doctor.name}</h5>
-                                <p class="text-uppercase mb-0"></p>
+                                <p class="text-uppercase mb-0"> {props.doctor.dept}</p>
+                                <p class="text-lowercase mb-0"> {props.doctor.email}</p>
                             </div>
                         </div>
                     </div>

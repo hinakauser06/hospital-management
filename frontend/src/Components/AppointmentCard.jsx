@@ -3,14 +3,18 @@ import axios from "axios";
 export default function AppointmentCard(props) {
     const [doctorId, setdoctorId] = useState();
     const [doctorResponse, SetdoctorResponse] = useState([]);
+//  implementation for assigning a doctor to patient by admin
 
     const assignDoctor = async () => {
         console.log(doctorId)
         await apiCallAssign()
         props.refreshList()
     }
+    // to get doctor list from db for doctor selection in frontend for assigning doctor
     const apiCallList = async (dept) => {
+        console.log(dept)
         const response = await axios.get(`http://localhost:5000/doctor?dept=${dept}`)
+        console.log(response)
         if (response && response.data && response.data.length > 0) {
             SetdoctorResponse(response.data)
         }
@@ -21,16 +25,19 @@ export default function AppointmentCard(props) {
                 appointmentId: props.appointment._id,
                 doctorId: doctorId
             })
+            console.log(response)
     }
     useEffect(() => {
         if (!props.appointment.isAssigned) {
             apiCallList(props.appointment.dept)
+            console.log(props.appointment.dept)
         }
+        // console.log(props.appointment.doctorId.name)
     }, [])
     return (
         <>
             <div class="card" style={{ width: "20rem" }}>
-                <img src="/img/patientFemale.jpg" class="card-img-top" alt="..." />
+                <img src="/img/patientcatoon.jpg" class="card-img-top" alt="..." style={{height: '150px'}}/>
                 <div class="card-body">
                     <h5 class="card-title">{props.appointment.patientId.name}</h5>
                     <p class="card-text">{props.appointment.problem}.</p>
@@ -49,7 +56,7 @@ export default function AppointmentCard(props) {
                     </>
                 }
                 {
-                    props.appointment.isAssigned && <p>Doctors :  {props.appointment.doctorId.name}</p>
+                    // props.appointment.isAssigned && <p>Doctors :  {props.appointment.doctorId.name}</p>
                 }
             </div>
         </>
