@@ -57,7 +57,8 @@ export default function Create() {
             </div>
             <div class="mb-3">
                 <label class="form-label">Problem In Detail</label>
-                <textarea value={problemDetail} onChange={(e) => setProblemDetail(e.target.value)} class="form-control" rows="3"></textarea>
+                <textarea value={problemDetail} onChange={(e) => setProblemDetail(e.target.value)} class="form-control" rows="3" maxLength={100}></textarea>
+            <p>Characters remaining: {100 - problemDetail.length}</p>
             </div>
             <button className='btn btn-outline-danger btn-block' onClick={createAppoinment}>Create</button>
         </div>

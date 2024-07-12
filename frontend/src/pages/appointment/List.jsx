@@ -13,11 +13,12 @@ export default function AppointmentList(props) {
         const response = await axios.get('http://localhost:5000/appointment')
         setappointmentResponse(response.data)
     }
-
+    console.log(appointmentResponse)
 
 
     useEffect(() => {
         apiCall()
+       
     }, [])
 
     return (
@@ -30,7 +31,7 @@ export default function AppointmentList(props) {
                 </div>
                 <div className="row" >
                     {appointmentResponse.map((appointment) => (
-                        <div className="col-sm-12 col-md-4 p-2 ">
+                        <div className="col-sm-12 col-md-4 p-2 " key={appointment._id}>
                             <AppointmentCard appointment={appointment} refreshList={apiCall} />
                         </div>
                     ))}

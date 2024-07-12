@@ -44,7 +44,7 @@ export default function AppointmentCard(props) {
                     <p class="card-text">Age: {props.appointment.patientId.age}</p>
                     <p class="card-text">Gender: {props.appointment.patientId.gender}</p>
                     <p class="card-text">Is Assigned: {props.appointment.isAssigned ? <>Yes</> : <>No</>}</p>
-                </div>
+                {/* </div> */}
                 {!props.appointment.isAssigned &&
                     <>
                         <select value={doctorId} class="form-select" aria-label="Default select example" onChange={(event) => setdoctorId(event.target.value)}>
@@ -56,8 +56,9 @@ export default function AppointmentCard(props) {
                     </>
                 }
                 {
-                    // props.appointment.isAssigned && <p>Doctors :  {props.appointment.doctorId.name}</p>
+                    props.appointment.isAssigned && <p> Doctors :  {props.appointment.doctorId.name}</p>
                 }
+                </div>
             </div>
         </>
     )

@@ -144,6 +144,7 @@ function Patient(props) {
                         </div>
                     </div>
                 </div>
+                
             </body>
         </>
     )

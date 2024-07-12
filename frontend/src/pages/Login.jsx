@@ -93,7 +93,7 @@ function Login(props) {
                             <label className="form-label">Email address</label>
                         </div>
                         <div className="col-4" >
-                            <input type="email" value={email} className="form-control " onChange={(event) => setEmail(event.target.value)} />
+                            <input type="email" value={email} className="form-control text-lowercase" onChange={(event) => setEmail(event.target.value)} />
 
                         </div>
                     </div>

@@ -6,6 +6,18 @@ import axios from "axios"
 function Doctor(props) {
     const [data, setData] = useState({})
     const navigate = useNavigate();
+    // for appointment list
+    const [appointmentResponse, setappointmentResponse] = useState([])
+
+    const apiCall = async () => {
+        const response = await axios.get('http://localhost:5000/appointment')
+        setappointmentResponse(response.data)
+    }
+    console.log(appointmentResponse)
+
+
+
+
     useEffect(() => {
         const isLogged = localStorage.getItem("loggedin")
         if (isLogged) {
@@ -13,15 +25,13 @@ function Doctor(props) {
             console.log(userdata)
             userdata = JSON.parse(userdata)
             setData(userdata)
+            apiCall()
         }
         else {
             navigate("/login")
         }
-
     }, [])
-    const redirect = () => {
-        return navigate("/doctor/AssignedPatient")
-    }
+
     return (
         <>
             <Headerbar />
@@ -65,18 +75,78 @@ function Doctor(props) {
                         </div>
                         <div className="row">
                             <div className="col-8  p-4" >
-                                <button type="button" class="btn btn-outline-success m-1"  >Appointment List</button>
-                                <button type="button" class="btn btn-outline-success m-1">Meeting</button>
-                                <button type="button" class="btn btn-outline-success m-1">Event</button>
-                                <button type="button" class="btn btn-outline-success m-1">Emergency</button>
+                                <p class="d-inline-flex gap-1">
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#patientappointed" aria-expanded="false" aria-controls="collapseExample">
+                                        Patient Appointed
+                                    </button>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#meeting" aria-expanded="false" aria-controls="collapseExample">
+                                        Meeting
+                                    </button>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#event" aria-expanded="false" aria-controls="collapseExample">
+                                        Event
+                                    </button>
+                                    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#emergency" aria-expanded="false" aria-controls="collapseExample">
+                                        Emergency
+                                    </button>
+                                </p>
+
                             </div>
                         </div>
                     </div>
 
                     <div className="col-4">
-                        <img src="/img/doctor1.jpg" alt="profile" id="profile" />
+                        <img src="/img/doctor1.jpg" alt="profile" id="profile" style={{ height: '300px', width: '350px' }} />
                     </div>
                 </div>
+                {/* for appointed patient list */}
+                <div className="row">
+                    <div className="col-12">
+                        <div class="collapse" id="patientappointed">
+                            <div class="card card-body" >
+                                <div className="container" >
+                                    <div className="row" >
+                                        {appointmentResponse && appointmentResponse.length > 0 && appointmentResponse.map((e) => (
+
+                                            (e.doctorId.name === data.name) && (
+                                                <>
+                                                    {/* <div className="col-2"> */}
+                                                    <div class="card" style={{ width: "22rem", margin: "4px" }}>
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item"> Patient Name:   {e.patientId.name}</li>
+                                                            <li class="list-group-item" >Problem: {e.problem}</li>
+                                                            <li class="list-group-item">Gender: {e.patientId.gender}</li>
+                                                            <li class="list-group-item">Age: {e.patientId.age}</li>
+                                                        </ul>
+                                                    </div>
+                                                    {/* </div> */}
+                                                </>
+                                            )
+
+
+                                        ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse" id="meeting">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                        <div class="collapse" id="event">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                        <div class="collapse" id="emergency">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </body>
         </>
     )
