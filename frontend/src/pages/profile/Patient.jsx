@@ -2,18 +2,37 @@ import { useEffect, useState } from "react"
 import Headerbar from "../../Components/Headerbar"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import TimeDate from "../../Components/TimeDate"
 
 function Patient(props) {
     const [data, setData] = useState({})
     const navigate = useNavigate();
     const [appointmentList, setappointmentList] = useState([])
-    const apiCall = async () => {
+    const [activeCollapse, setActiveCollapse] = useState(null)
+    const collapseToggle = (collapseId) => {
+        setActiveCollapse(activeCollapse === collapseId ? null : collapseId)
+    }
+    const apiCallAppointmentList = async () => {
         const response = await axios.get("http://localhost:5000/appointment")
         setappointmentList(response)
         console.log(response)
     }
-    // console.log(appointmentList.data.doctorId)
+    // to create appointment on profile page
+    const [dept, setDept] = useState("");
+    const [problemDetail, setProblemDetail] = useState("")
+    const apiCall = async () => {
+        const response = await axios.post("http://localhost:5000/appointment", {
+            dept: dept,
+            problem: problemDetail,
+            patientId: data._id
+
+        })
+    }
+    const createAppoinment = async () => {
+        await apiCall();
+        setDept("")
+        setProblemDetail("")
+    }
+    // end
     useEffect(() => {
         const isLogged = localStorage.getItem("loggedin")
         if (isLogged) {
@@ -22,12 +41,9 @@ function Patient(props) {
             userdata = JSON.parse(userdata)
             // console.log(userdata)
             setData(userdata)
-            apiCall()
-
-
+            apiCallAppointmentList()
         }
         else {
-
             navigate("/login")
         }
         return () => { }
@@ -49,7 +65,6 @@ function Patient(props) {
                                 {data.name}
                             </div>
                         </div>
-
                         <div className="row mx-2 p-1">
                             <div className="col-2">
                                 <label for="email" className="col-form-label"> Email: </label>
@@ -58,7 +73,6 @@ function Patient(props) {
                                 {data.email}
                             </div>
                         </div>
-
                         <div className="row mx-2 p-1">
                             <div className="col-2">
                                 <label for="address" className="col-form-label">Address: </label>
@@ -89,15 +103,17 @@ function Patient(props) {
                                 {data.age}
                             </div>
                         </div>
-                        <div className="row" >
-                            <div className="col-4">
-                                <button className="btn btn-primary btn-lg " onClick={() => navigate("/appointment/create")}>
-                                    Book Appoinment
-                                </button>
+                        <div className="row" style={{ marginTop: '45px' }}>
+                            <div className="col-3 ps-4" >
+                                <p class="d-inline-flex">
+                                    <button class="btn btn-outline-primary btn-sm" type="button" onClick={() => collapseToggle('createAppointment')}>
+                                        Create Appointment
+                                    </button>
+                                </p>
                             </div>
-                            <div className="col-4">
-                                <p class="d-inline-flex gap-1">
-                                    <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <div className="col-3 g-0" >
+                                <p class="d-inline-flex">
+                                    <button class="btn btn-outline-primary btn-sm" type="button" onClick={() => collapseToggle('appointmentHistory')}>
                                         Appointment History
                                     </button>
                                 </p>
@@ -109,34 +125,35 @@ function Patient(props) {
                         <img src="/img/patientprofile.avif" alt="profile" id="profile" />
                     </div>
                 </div>
-                {/* <TimeDate/> */}
                 <div className="row">
                     <div className=" col-12" >
-                        <div class="collapse " id="collapseExample">
+                        <div class={`collapse ${activeCollapse === 'appointmentHistory' ? 'show' : ''}`} id="appointmentHistory">
                             <div class="card card-body">
                                 <div className="container">
                                     <div className="row" >
                                         {
-                                            appointmentList && appointmentList.data && appointmentList.data.length > 0 && appointmentList.data.map((e) => (
-                                                <>
-                                                    <div className=" col-sm-4">
-                                                        <div class="card border-success mb-3 " style={{ width: "20rem", Height: "40rem" }}>
-                                                            <div class="card-header bg-transparent border-success"> {e.isAssigned ? <><b> Your Appointment has been Booked</b></> : <><b className="textColor">Not assigned yet </b></>}</div>
-                                                            <div class="card-body text-success">
-                                                                <h5 class="card-title"> </h5>
-                                                                <p class="card-text">{e.problem}</p>
-                                                                {/* <p class="card-text">{e.dept}</p> */}
+                                            appointmentList && appointmentList.data && appointmentList.data.length > 0 && appointmentList.data.map((e) =>
+                                                data._id === e.patientId._id &&
+                                                (
+                                                    <>
+                                                        <div className=" col-sm-6 col-lg-3">
+                                                            <div class="card border-success mb-3 " style={{ width: "15rem", Height: "40rem" }}>
+                                                                <div class="card-header bg-transparent border-success"> {e.isAssigned ? <><b>Hello {e.patientId.name}, Your Appointment has been Booked with Dr. {e.doctorId.name}</b></> : <><b className="textColor">Not assigned yet </b></>}</div>
+                                                                <div class="card-body text-success">
+                                                                    <h5 class="card-title"> </h5>
+                                                                    <p class="card-text">{e.problem}</p>
+                                                                </div>
+                                                                {e.isAssigned &&
+                                                                    <>
+                                                                        <div class="card-footer bg-transparent border-success">{e.isAssigned && e.dept} </div>
+                                                                    </>
+                                                                }
                                                             </div>
-                                                            {e.isAssigned && 
-                                                            <>
-                                                                {/* <div class="card-footer bg-transparent border-success" key={e.doctorId.name}>Dr. {e.isAssigned && e.doctorId.name} is assigned </div> */}
-                                                                <div class="card-footer bg-transparent border-success">{e.isAssigned && e.dept} </div>
-                                                            </>
-                                                            }
                                                         </div>
-                                                    </div>
-                                                </>
-                                            ))
+                                                    </>
+
+                                                )
+                                            )
                                         }
                                     </div>
                                 </div>
@@ -144,8 +161,41 @@ function Patient(props) {
                         </div>
                     </div>
                 </div>
-                
-            </body>
+                {/* to create appointment */}
+                <div className="row">
+                    <div class={`collapse ${activeCollapse === 'createAppointment' ? 'show' : ''}`} id="createAppointment">
+                        <div class="card card-body">
+                            <div class="card border-success mb-3 " style={{ width: "28rem", Height: "40rem" }}>
+                                <div class="card-header bg-transparent border-success">
+                                    <div class="col-12" style={{ display: 'flex' }}>
+                                        <label for="dept" class="col-form-label col-3"> Select Dept: </label>
+                                        <select value={dept} class="form-select" aria-label="Default select example" onChange={(event) => setDept(event.target.value)}>
+                                            <option selected>DEPT</option>
+                                            <option value="physician">Physician</option>
+                                            <option value="neurologist">Neurologist</option>
+                                            <option value="gynologist">Gynologist</option>
+                                            <option value="andrologist">Andrologist</option>
+                                            <option value="sexologist">SexoLogist</option>
+                                            <option value="dermatologist">Dermatologist</option>
+                                            <option value="cardiologist">Cardiologist</option>  {/*heart*/}
+                                            <option value="oncologists">Oncologists</option>  {/*cancer*/}
+                                            <option value="ophthalmologists">Ophthalmologists</option>  {/*eye*/}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="card-body text-success">
+                                    <div class="mb-3">
+                                        <label class="form-label">Problem In Detail</label>
+                                        <textarea value={problemDetail} onChange={(e) => setProblemDetail(e.target.value)} class="form-control" rows="3" maxLength={100}></textarea>
+                                        <p>Characters remaining: {100 - problemDetail.length}</p>
+                                    </div>
+                                    <button className='btn btn-outline-danger btn-block' onClick={createAppoinment}>Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body >
         </>
     )
 }

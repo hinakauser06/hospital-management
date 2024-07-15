@@ -9,7 +9,6 @@ function Headerbar(props) {
         navigate('/')
     }
     function ProfileRedirect() {
-
         navigate('/profile/' + usertype)
     }
     const [isLoggedin, setLoggedin] = useState(false)
@@ -21,10 +20,7 @@ function Headerbar(props) {
             setLoggedin(true)
             const user = localStorage.getItem("usertype")
             setUsertype(user)
-
         }
-
-
     }, [])
 
     return (
@@ -51,8 +47,6 @@ function Headerbar(props) {
                             </form>
                         </div>
                     </nav>
-                    {/* </span> */}
-                    {/* </button> */}
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
@@ -74,11 +68,8 @@ function Headerbar(props) {
                             {isLoggedin ? <button type="button" class="btn btn-danger btn-sm" onClick={logOut}>Logout</button> : <li className="nav-item">
                                 <Link className="nav-link text-white" to="/login">Login</Link>
                             </li>}
-
                             {isLoggedin}
-
                         </ul>
-
                     </div>
                 </div>
             </nav>

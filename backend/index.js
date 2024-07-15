@@ -37,11 +37,7 @@ app.get('/doctor', cors(), async (req, res) => {
     // for filter
     const dept = req.query.dept
     try {
-        // const filters = {}
-        // if (req.query.dept) 
-        // {
-        //     filters.dept = req.query.dept
-        // }
+
         const doctor = await DoctorModel.find(dept ? { dept } : {})
         res.json(doctor)
     }
@@ -49,9 +45,6 @@ app.get('/doctor', cors(), async (req, res) => {
         res.status(5000).json({ message: err.message })
     }
 
-    // const data = await DoctorModel.find()
-    // console.log(data)
-    // res.json(data)
 })
 
 app.post('/doctor', cors(), async (req, res) => {
@@ -62,16 +55,11 @@ app.post('/doctor', cors(), async (req, res) => {
         name: name, email: email, password: password, dept: dept, phone: phone
     })
     const result = await doctorObj.save()
-    // console.log(result)
     res.json(result)
 
 })
 
-// for patient
-/* 
-1. need to add all function description
 
-*/
 const PatientModel = mongoose.model('patient', { name: String, email: String, password: String, problem: String, experience: Number, gender: String, age: Number });
 
 app.get('/patient', cors(), async (req, res) => {
@@ -102,13 +90,11 @@ app.post('/appointment', cors(), async (req, res) => {
 // for getting appointment list on front end on admin profile
 
 app.get('/appointment', cors(), async (req, res) => {
-    try 
-    {
+    try {
         const appointments = await AppointmentModel.find().populate("patientId").populate("doctorId")
         res.json(appointments)
     }
-    catch (error) 
-    {
+    catch (error) {
         console.error('Eror fetching appointments: ', error)
         res.status(500).send('server error')
     }

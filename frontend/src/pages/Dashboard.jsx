@@ -21,7 +21,6 @@ function Dashboard(props) {
                             background: "red",
                             margin: '20px 0'
                         }} ></hr>
-
                         <div className="col-12 mt-5 " style={{ color: 'red' }}>
                             <p><i className="fa fa-ambulance"></i>  For Support : +91-456-67-678</p>
                         </div>
@@ -30,7 +29,6 @@ function Dashboard(props) {
                         </div>
                     </div>
                     <div className="col-7 mt-5 ps-0">
-
                         <div id="carouselExample" class="carousel slide" >
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
@@ -55,10 +53,7 @@ function Dashboard(props) {
                     </div>
                 </div>
             </div>
-
             <Footer />
-
-
         </>
     );
 }

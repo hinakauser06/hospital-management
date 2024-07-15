@@ -3,15 +3,13 @@ import Footer from "../../Components/Footer"
 
 export default function AppointmentSchedule(props) {
 
-
-
     return (
         <>
             <Headerbar />
             <div className="container">
                 <div className="row">
                     <div className="col-3 col-lg-4 col-sm-6">
-                        <div class="card" style={{ width: '18rem' }}>
+                        <div class="card" style={{ nwidth: '18rem' }}>
                             <div class="card-header">
                                 Featured
                             </div>

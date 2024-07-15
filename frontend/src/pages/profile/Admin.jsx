@@ -5,11 +5,6 @@ import { redirect, useNavigate } from "react-router-dom"
 function Admin(props) {
     const [data, setData] = useState({})
     const navigate = useNavigate();
-    // for getting doctor list
-    function DoctorList() {
-
-    }
-    // end of function
     useEffect(() => {
         const isLogged = localStorage.getItem("loggedin")
         if (isLogged) {
@@ -17,10 +12,8 @@ function Admin(props) {
             console.log(userdata)
             userdata = JSON.parse(userdata)
             setData(userdata)
-
         }
         else {
-
             navigate("/login")
         }
 
@@ -34,7 +27,6 @@ function Admin(props) {
             <Headerbar />
             <body className="container ">
                 <div className="row">
-
                     <h3 style={{ textAlign: "center" }} >
                         <i className="bi bi-person"></i>  Welcome Back! {data.name}
                     </h3>
@@ -56,22 +48,18 @@ function Admin(props) {
                             </div>
                         </div>
                         <div className="row">
-                        <div className="col-12 p-4">
-                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/doctor/list")}>Doctor List</button>
-                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/patient/list")}>Patient List</button>
-                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/appointment/list")}>Appointment Resquest</button>
-                            <button type="button" class="btn btn-outline-success m-2" onClick={() => navigate("/appointment/appointmentSchedule")}>Appointment Status</button>
+                            <div className="col-12 p-4">
+                                <button type="button" class="btn btn-outline-primary m-2" onClick={() => navigate("/doctor/list")}>Doctor List</button>
+                                <button type="button" class="btn btn-outline-primary m-2" onClick={() => navigate("/patient/list")}>Patient List</button>
+                                <button type="button" class="btn btn-outline-primary m-2" onClick={() => navigate("/appointment/list")}>Appointment Resquest</button>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                   
+
                     <div className="col-4">
                         <img src="/img/adminprofile.webp" alt="profile" id="profile" />
                     </div>
                 </div>
-
-
-
             </body>
         </>
     )

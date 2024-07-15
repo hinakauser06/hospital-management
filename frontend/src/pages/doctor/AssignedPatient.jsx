@@ -8,21 +8,13 @@ export default function AssignedPatient(props) {
     const currentDoctor = JSON.parse(localStorage.getItem('data'))
     console.log(currentDoctor)
     const [patientList, setPatientList] = useState([])
-    // const { name } = useParams()
     const apiCall = async () => {
         const response = await axios.get('http://localhost:5000/appointment')
         console.log(response.data)
-        // console.log(patientList[4].patient.name)
-
         setPatientList(response.data)
-
     }
-
-
     useEffect(() => {
         apiCall()
-
-
     }, [currentDoctor.name])
 
     return (

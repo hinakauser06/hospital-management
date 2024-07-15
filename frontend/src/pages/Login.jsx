@@ -10,7 +10,6 @@ function Login(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
-
     const [result, setResult] = useState({})
     const [alert, setAlert] = useState({
         isAlert: false,
@@ -107,10 +106,11 @@ function Login(props) {
                     </div>
                 </div>
                 <div className="text-center  my-3" >
-                    <button type="submit" className="btn btn-primary" onClick={loginuser}>Submit</button>
+                    <button type="submit" className="btn btn-outline-primary" onClick={loginuser}>Submit</button>
                 </div>
 
             </div>
+
             <Footer />
         </>
 

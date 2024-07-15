@@ -80,13 +80,11 @@ export default function Footer() {
                             <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                             <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
                             <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>
-                            <li  style={{ marginLeft: '450px'}}>  Copyright © 2024 Inamdar Multispeciality Hospital Pune.</li>
+                            <li style={{ marginLeft: '450px' }}>  Copyright © 2024 Inamdar Multispeciality Hospital Pune.</li>
                         </ul>
                     </div>
                 </div>
             </footer>
-
-
         </>
     )
 }

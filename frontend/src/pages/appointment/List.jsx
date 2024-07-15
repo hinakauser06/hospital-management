@@ -14,15 +14,12 @@ export default function AppointmentList(props) {
         setappointmentResponse(response.data)
     }
     console.log(appointmentResponse)
-
-
     useEffect(() => {
         apiCall()
-       
+
     }, [])
 
     return (
-
         <>
             <Headerbar />
             <div className="container ">
@@ -37,7 +34,7 @@ export default function AppointmentList(props) {
                     ))}
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     )
 

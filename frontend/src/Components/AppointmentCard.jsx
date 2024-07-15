@@ -3,12 +3,20 @@ import axios from "axios";
 export default function AppointmentCard(props) {
     const [doctorId, setdoctorId] = useState();
     const [doctorResponse, SetdoctorResponse] = useState([]);
-//  implementation for assigning a doctor to patient by admin
+    const [showAlert, setShowAlert] = useState(false)
+    //  implementation for assigning a doctor to patient by admin
 
     const assignDoctor = async () => {
-        console.log(doctorId)
-        await apiCallAssign()
-        props.refreshList()
+        if (doctorId) {
+            console.log(doctorId)
+            await apiCallAssign()
+            props.refreshList()
+            setShowAlert(false)
+        }
+        else {
+            console.log("select doctor")
+            setShowAlert(true)
+        }
     }
     // to get doctor list from db for doctor selection in frontend for assigning doctor
     const apiCallList = async (dept) => {
@@ -25,7 +33,7 @@ export default function AppointmentCard(props) {
                 appointmentId: props.appointment._id,
                 doctorId: doctorId
             })
-            console.log(response)
+        console.log(response)
     }
     useEffect(() => {
         if (!props.appointment.isAssigned) {
@@ -37,27 +45,30 @@ export default function AppointmentCard(props) {
     return (
         <>
             <div class="card" style={{ width: "20rem" }}>
-                <img src="/img/patientcatoon.jpg" class="card-img-top" alt="..." style={{height: '150px'}}/>
+                <img src="/img/patientcatoon.jpg" class="card-img-top" alt="..." style={{ height: '150px' }} />
                 <div class="card-body">
                     <h5 class="card-title">{props.appointment.patientId.name}</h5>
                     <p class="card-text">{props.appointment.problem}.</p>
                     <p class="card-text">Age: {props.appointment.patientId.age}</p>
                     <p class="card-text">Gender: {props.appointment.patientId.gender}</p>
                     <p class="card-text">Is Assigned: {props.appointment.isAssigned ? <>Yes</> : <>No</>}</p>
-                {/* </div> */}
-                {!props.appointment.isAssigned &&
-                    <>
-                        <select value={doctorId} class="form-select" aria-label="Default select example" onChange={(event) => setdoctorId(event.target.value)}>
-                            <option selected>Select Doctor</option>
+                    {/* </div> */}
+                    {!props.appointment.isAssigned &&
+                        <>
+                            <select value={doctorId} class="form-select" aria-label="Default select example" onChange={(event) => setdoctorId(event.target.value)}>
+                                <option selected>Select Doctor</option>
 
-                            {doctorResponse.map((e) => (<option value={e._id} key={e._id}> {e.name}</option>))}
-                        </select>
-                        <button type="button" class="btn btn-primary" onClick={assignDoctor}>Assign</button>
-                    </>
-                }
-                {
-                    props.appointment.isAssigned && <p> Doctors :  {props.appointment.doctorId.name}</p>
-                }
+                                {doctorResponse.map((e) => (<option value={e._id} key={e._id}> {e.name}</option>))}
+                            </select>
+                            <button type="button" class="btn btn-primary" onClick={assignDoctor}>Assign</button>
+                            {showAlert && <div class="alert alert-warning" role="alert">
+                                Please select a Doctor
+                            </div>}
+                        </>
+                    }
+                    {
+                        props.appointment.isAssigned && <p> Doctors :  {props.appointment.doctorId.name}</p>
+                    }
                 </div>
             </div>
         </>

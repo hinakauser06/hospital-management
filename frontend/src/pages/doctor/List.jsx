@@ -10,28 +10,16 @@ import Footer from '../../Components/Footer';
 
 function DoctorList(props) {
     const navigate = useNavigate();
-
-    // const [adminResponse, setadminResponse] = useState([]);
-    // const [patientResponse, setpatientResponse] = useState([]);
     const [doctorResponse, setdoctorResponse] = useState([]);
     const apiCall = async () => {
         const response = await axios.get('http://localhost:5000/doctor')
         console.log(response)
         setdoctorResponse(response.data)
-        //   console.log(setdoctorResponse)
-        // const response1 = await axios.get('http://localhost:5000/patients')
-        // console.log(response1)
-        // setpatientResponse(response1.data)
-
-        // const response2 = await axios.get('http://localhost:5000/admin')
-        // console.log(response2)
-        // setadminResponse(response2.data)
     }
 
     useEffect(() => {
         console.log('Component mounted');
         apiCall()
-
     }, []);
     const redirect = () => {
         return navigate("/doctor/create")
@@ -40,7 +28,7 @@ function DoctorList(props) {
     return (
         <>
             <Headerbar />
-            <div className="container" style={{overflowY: "auto"}}>
+            <div className="container" style={{ overflowY: "auto" }}>
                 <div className="row my-3">
                     <div className="col-10">
                         <h3 className="text-center" >Doctors List</h3>

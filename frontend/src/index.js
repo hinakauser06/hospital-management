@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Router } from 'react-router-dom';
 
 // for doctor
 import DoctorList from './pages/doctor/List';
@@ -17,7 +18,7 @@ import PatientCreate from './pages/patient/Create';
 import AdminCreate from './pages/admin/Create';
 import AdminList from './pages/admin/List';
 // for bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 
@@ -28,17 +29,17 @@ import Patient from './pages/profile/Patient';
 import Doctor from './pages/profile/Doctor';
 import Admin from './pages/profile/Admin';
 
-import CreateAppointment from "./pages/appointment/Create"
+// import CreateAppointment from "./pages/appointment/Create"
 import AppointmentList from "./pages/appointment/List"
-import AppointmentSchedule from './pages/appointment/AppointmentSchedule';
-import AssignedPatient from './pages/doctor/AssignedPatient';
+// import AppointmentSchedule from './pages/appointment/AppointmentSchedule';
+// import AssignedPatient from './pages/doctor/AssignedPatient';
 import AboutUs from './pages/AboutUs';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard/>,
+    element: <Dashboard />,
   },
   {
     path: "/doctor/list",
@@ -66,53 +67,38 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/profile/admin",
-    element: <Admin/>,
+    element: <Admin />,
   },
   {
     path: "/profile/doctor",
-    element: <Doctor/>,
+    element: <Doctor />,
   },
   {
     path: "/profile/patient",
-    element: <Patient/>,
-  },
-  {
-    path: "/appointment/create",
-    element: <CreateAppointment />,
+    element: <Patient />,
   },
   {
     path: "/appointment/list",
     element: <AppointmentList />,
   },
   {
-    path: "/appointment/appointmentSchedule",
-    element: <AppointmentSchedule />,
-  },
-  {
-    path: "/doctor/AssignedPatient",
-    element: <AssignedPatient />,
-  },
-  {
     path: "/aboutUs",
-    element: <AboutUs/>
+    element: <AboutUs />
   }
 
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router} />
+  // <React.StrictMode>
+  //  <App /> 
+  <RouterProvider router={router} />
 
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
